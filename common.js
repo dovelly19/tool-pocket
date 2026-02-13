@@ -41,6 +41,7 @@ function renderFooter() {
         <div class="footer-inner">
             <div class="footer-links">
                 <a href="${basePath}/">🧰 全ツール一覧</a>
+                <a href="${basePath}/privacy/">📜 プライバシーポリシー</a>
             </div>
             <p>© ${new Date().getFullYear()} ToolPocket. すべてのツールは無料でご利用いただけます。</p>
             <p style="margin-top:8px;font-size:11px;">すべての処理はブラウザ内で完結します。データがサーバーに送信されることはありません。</p>
