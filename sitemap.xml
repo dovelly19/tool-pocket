@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url><loc>https://toolpocket.vercel.app/</loc><priority>1.0</priority></url>
-    <url><loc>https://toolpocket.vercel.app/moji-kaunto/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/wareki-seireki/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/nenrei-keisan/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/nissuu-keisan/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/password/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/qr-code/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/warikan/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/bmi/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/zenkaku-hankaku/</loc><priority>0.8</priority></url>
-    <url><loc>https://toolpocket.vercel.app/color-code/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/</loc><priority>1.0</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/moji-kaunto/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/wareki-seireki/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/nenrei-keisan/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/nissuu-keisan/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/password/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/qr-code/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/warikan/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/bmi/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/zenkaku-hankaku/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/color-code/</loc><priority>0.8</priority></url>
 </urlset>

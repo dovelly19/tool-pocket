@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>割り勘計算 - 飲み会の割り勘をかんたん計算 | ToolPocket</title>
-    <meta name="description" content="飲み会や食事の割り勘をかんたん計算。人数、金額を入力するだけ。端数の調整や傾斜配分にも対応。完全無料。">
-    <meta name="keywords" content="割り勘計算,割り勘,飲み会 割り勘,割り勘 アプリ">
-    <link rel="canonical" href="https://toolpocket.vercel.app/warikan/">
+    <title>割り勘計箁E- 飲み会�E割り勘をかんたん計箁E| ToolPocket</title>
+    <meta name="description" content="飲み会や食事�E割り勘をかんたん計算。人数、E��額を入力するだけ。端数の調整めE��斜�E刁E��も対応。完�E無料、E>
+    <meta name="keywords" content="割り勘計箁E割り勘,飲み企E割り勘,割り勘 アプリ">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/warikan/">
     <link rel="stylesheet" href="../style.css">
 </head>
 
@@ -15,40 +15,40 @@
     <header class="site-header" id="site-header"></header>
     <main class="main-content">
         <div class="tool-page-header">
-            <div class="breadcrumb"><a href="../">ToolPocket</a> / 割り勘計算</div>
-            <h1>💰 割り勘計算</h1>
-            <p class="tool-desc">合計金額と人数を入力するだけで、一人あたりの金額を計算します。端数の処理も自動。</p>
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / 割り勘計箁E/div>
+            <h1>💰 割り勘計箁E/h1>
+            <p class="tool-desc">合計��額と人数を�E力するだけで、一人あたり�E金額を計算します。端数の処琁E��自動、E/p>
         </div>
-        <div class="ad-slot">広告エリア</div>
+        <div class="ad-slot">庁E��エリア</div>
         <div class="tool-container">
             <div class="form-group">
-                <label for="total-amount">合計金額（円）</label>
-                <input type="number" id="total-amount" placeholder="例: 15000" value="15000">
+                <label for="total-amount">合計��額（�E�E�E/label>
+                <input type="number" id="total-amount" placeholder="侁E 15000" value="15000">
             </div>
             <div class="form-group">
                 <label for="num-people">人数</label>
-                <input type="number" id="num-people" placeholder="例: 4" value="4" min="1">
+                <input type="number" id="num-people" placeholder="侁E 4" value="4" min="1">
             </div>
             <div class="form-group">
-                <label for="round-unit">端数の丸め単位</label>
+                <label for="round-unit">端数の丸め単佁E/label>
                 <select id="round-unit">
-                    <option value="1">1円単位（そのまま）</option>
-                    <option value="10">10円単位</option>
-                    <option value="100" selected>100円単位</option>
-                    <option value="500">500円単位</option>
-                    <option value="1000">1,000円単位</option>
+                    <option value="1">1冁E��位（そのまま�E�E/option>
+                    <option value="10">10冁E��佁E/option>
+                    <option value="100" selected>100冁E��佁E/option>
+                    <option value="500">500冁E��佁E/option>
+                    <option value="1000">1,000冁E��佁E/option>
                 </select>
             </div>
-            <button class="btn btn-primary btn-block" onclick="calcWarikan()">計算する</button>
+            <button class="btn btn-primary btn-block" onclick="calcWarikan()">計算すめE/button>
 
             <div class="result-box" id="result" style="display:none;">
                 <div class="result-value" id="per-person">-</div>
-                <div class="result-label">一人あたり</div>
+                <div class="result-label">一人あためE/div>
             </div>
             <div class="result-grid" id="details" style="display:none;">
                 <div class="result-item">
                     <div class="val" id="exact-amount">-</div>
-                    <div class="lbl">端数なし金額</div>
+                    <div class="lbl">端数なし��顁E/div>
                 </div>
                 <div class="result-item">
                     <div class="val" id="remainder">-</div>
@@ -56,18 +56,18 @@
                 </div>
                 <div class="result-item">
                     <div class="val" id="collected">-</div>
-                    <div class="lbl">回収合計</div>
+                    <div class="lbl">回収合訁E/div>
                 </div>
             </div>
         </div>
-        <div class="ad-slot">広告エリア</div>
+        <div class="ad-slot">庁E��エリア</div>
         <section class="info-section">
-            <h2>割り勘計算の使い方</h2>
-            <p>合計金額と人数を入力して「計算する」ボタンを押してください。端数の丸め単位を変更して、キリのいい金額にすることもできます。</p>
+            <h2>割り勘計算�E使ぁE��</h2>
+            <p>合計��額と人数を�E力して「計算する」�Eタンを押してください。端数の丸め単位を変更して、キリのぁE��金額にすることもできます、E/p>
             <ul>
-                <li>100円単位で丸めると、お釣りの計算が楽に</li>
-                <li>余り金額は幹事へのチップまたは次回持ち越しに</li>
-                <li>飲み会、食事会、旅行費用の精算に便利</li>
+                <li>100冁E��位で丸めると、お釣り�E計算が楽に</li>
+                <li>余り金額�E幹事へのチップまた�E次回持ち越しに</li>
+                <li>飲み会、E��事会、旅行費用の精算に便利</li>
             </ul>
         </section>
         <div class="related-tools" id="related-tools"></div>
