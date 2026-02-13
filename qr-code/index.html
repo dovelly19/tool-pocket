@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QRコード生成 - テキストやURLからQRコード作成 | ToolPocket</title>
+    <meta name="description" content="テキストやURLを入力するだけでQRコードを瞬時に生成。ダウンロードも可能。完全無料・登録不要のオンラインツール。">
+    <meta name="keywords" content="QRコード生成,QRコード作成,QR生成,QRコード 無料">
+    <link rel="canonical" href="https://toolpocket.vercel.app/qr-code/">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / QRコード生成</div>
+            <h1>📱 QRコード生成</h1>
+            <p class="tool-desc">テキストやURLを入力するだけで、QRコードを即座に生成できます。</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+            <div class="form-group">
+                <label for="qr-input">テキストまたはURL</label>
+                <input type="text" id="qr-input" placeholder="例: https://example.com"
+                    value="https://toolpocket.vercel.app">
+            </div>
+            <div class="form-group">
+                <label for="qr-size">サイズ</label>
+                <select id="qr-size">
+                    <option value="4">小 (132px)</option>
+                    <option value="6" selected>中 (200px)</option>
+                    <option value="10">大 (330px)</option>
+                </select>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="generateQR()">QRコードを生成</button>
+            <div style="text-align:center;margin-top:20px;">
+                <div class="qr-output" id="qr-output" style="display:none;"></div>
+            </div>
+            <div class="btn-group" style="margin-top:16px;justify-content:center;" id="qr-actions"
+                style="display:none;">
+                <button class="btn btn-secondary" onclick="downloadQR()" id="dl-btn" style="display:none;">💾
+                    ダウンロード</button>
+            </div>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>QRコードとは</h2>
+            <p>QRコード（Quick Response Code）は、二次元バーコードの一種で、スマートフォンのカメラで読み取ることができます。URL、テキスト、連絡先情報など、さまざまなデータを格納できます。</p>
+            <ul>
+                <li>WebサイトのURLを手軽に共有</li>
+                <li>名刺やチラシに印刷して情報を伝達</li>
+                <li>Wi-Fiの接続情報を共有</li>
+                <li>イベントの受付やチケットに活用</li>
+            </ul>
+        </section>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+    <script src="../common.js"></script>
+    <script>
+        function generateQR() {
+            const text = document.getElementById('qr-input').value.trim();
+            if (!text) { showToast('テキストを入力してください'); return; }
+            const size = parseInt(document.getElementById('qr-size').value);
+            const qr = qrcode(0, 'M');
+            qr.addData(text);
+            qr.make();
+            const output = document.getElementById('qr-output');
+            output.innerHTML = qr.createSvgTag(size, 0);
+            output.style.display = 'inline-block';
+            document.getElementById('dl-btn').style.display = '';
+        }
+
+        function downloadQR() {
+            const svg = document.querySelector('#qr-output svg');
+            if (!svg) return;
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            const data = new XMLSerializer().serializeToString(svg);
+            const img = new Image();
+            img.onload = function () {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.drawImage(img, 0, 0);
+                const a = document.createElement('a');
+                a.download = 'qrcode.png';
+                a.href = canvas.toDataURL('image/png');
+                a.click();
+            };
+            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(data)));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            generateQR();
+            renderRelatedTools('qr-code');
+        });
+    </script>
+</body>
+
+</html>

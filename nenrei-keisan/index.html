@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>年齢計算 - 生年月日から年齢を自動計算 | ToolPocket</title>
+    <meta name="description" content="生年月日を入力するだけで、現在の年齢を正確に計算。次の誕生日までの日数も表示。完全無料・登録不要。">
+    <meta name="keywords" content="年齢計算,年齢,生年月日 年齢,何歳,年齢早見表">
+    <link rel="canonical" href="https://toolpocket.vercel.app/nenrei-keisan/">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / 年齢計算</div>
+            <h1>🎂 年齢計算</h1>
+            <p class="tool-desc">生年月日を入力すると、現在の年齢や次の誕生日までの日数を自動で計算します。</p>
+        </div>
+
+        <div class="ad-slot">広告エリア</div>
+
+        <div class="tool-container">
+            <div class="form-group">
+                <label for="birth-date">生年月日</label>
+                <input type="date" id="birth-date" value="2000-01-01">
+            </div>
+            <button class="btn btn-primary btn-block" onclick="calculate()">計算する</button>
+
+            <div class="result-box" id="result" style="display:none;">
+                <div class="result-value" id="age-output">-</div>
+                <div class="result-label">歳</div>
+            </div>
+
+            <div class="result-grid" id="details" style="display:none;">
+                <div class="result-item">
+                    <div class="val" id="months">-</div>
+                    <div class="lbl">月齢</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="days">-</div>
+                    <div class="lbl">日数</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="next-bday">-</div>
+                    <div class="lbl">次の誕生日まで</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="zodiac">-</div>
+                    <div class="lbl">干支</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-slot">広告エリア</div>
+
+        <section class="info-section">
+            <h2>年齢計算の使い方</h2>
+            <p>生年月日を入力して「計算する」ボタンを押すと、現在の年齢が表示されます。</p>
+            <ul>
+                <li>満年齢で計算されます</li>
+                <li>月齢（何ヶ月）や生まれてからの日数も表示</li>
+                <li>次の誕生日までの残り日数がわかります</li>
+                <li>干支も表示されます</li>
+            </ul>
+        </section>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        const ZODIAC = ['申', '酉', '戌', '亥', '子', '丑', '寅', '卯', '辰', '巳', '午', '未'];
+
+        function calculate() {
+            const birthDate = new Date(document.getElementById('birth-date').value);
+            const today = new Date();
+            if (isNaN(birthDate.getTime())) return;
+
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+
+            document.getElementById('age-output').textContent = age;
+            document.getElementById('result').style.display = '';
+            document.getElementById('details').style.display = '';
+
+            // Months
+            let months = (today.getFullYear() - birthDate.getFullYear()) * 12 + today.getMonth() - birthDate.getMonth();
+            if (today.getDate() < birthDate.getDate()) months--;
+            document.getElementById('months').textContent = months.toLocaleString();
+
+            // Days
+            const diffTime = today.getTime() - birthDate.getTime();
+            const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            document.getElementById('days').textContent = diffDays.toLocaleString();
+
+            // Next birthday
+            let nextBday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+            if (nextBday <= today) nextBday.setFullYear(nextBday.getFullYear() + 1);
+            const daysUntil = Math.ceil((nextBday - today) / (1000 * 60 * 60 * 24));
+            document.getElementById('next-bday').textContent = daysUntil + '日';
+
+            // Zodiac
+            document.getElementById('zodiac').textContent = ZODIAC[birthDate.getFullYear() % 12];
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            calculate();
+            renderRelatedTools('nenrei-keisan');
+        });
+    </script>
+</body>
+
+</html>

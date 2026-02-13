@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全角⇔半角変換 - テキストの全角半角を一括変換 | ToolPocket</title>
+    <meta name="description" content="テキスト内の全角文字を半角に、半角文字を全角に一括変換。カタカナ・英数字・記号に対応。完全無料・登録不要。">
+    <meta name="keywords" content="全角 半角 変換,全角半角,半角変換,全角変換,カタカナ 半角">
+    <link rel="canonical" href="https://toolpocket.vercel.app/zenkaku-hankaku/">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / 全角⇔半角変換</div>
+            <h1>🔄 全角⇔半角変換</h1>
+            <p class="tool-desc">テキスト内の全角・半角文字を一括で変換します。英数字、カタカナ、記号に対応。</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+            <div class="form-group">
+                <label for="input-text">変換するテキスト</label>
+                <textarea id="input-text" rows="5" placeholder="ここにテキストを入力してください">Ｈｅｌｌｏ　Ｗｏｒｌｄ！１２３４５　カタカナ</textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="toHankaku()">半角に変換 →</button>
+                <button class="btn btn-primary" onclick="toZenkaku()">← 全角に変換</button>
+            </div>
+            <div class="form-group" style="margin-top:20px;">
+                <label for="output-text">変換結果</label>
+                <textarea id="output-text" rows="5" readonly></textarea>
+            </div>
+            <button class="copy-btn" id="copy-btn" onclick="copyResult()" style="width:100%;padding:12px;">📋
+                結果をコピー</button>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>全角・半角変換について</h2>
+            <p>日本語のテキストでは、英数字や記号が全角と半角に混在することがあります。データ入力やプログラミングの際に統一する必要がある場合にこのツールをご利用ください。</p>
+            <ul>
+                <li><strong>全角→半角</strong>: データベース登録やCSV出力時に</li>
+                <li><strong>半角→全角</strong>: 日本語文書の体裁を整える時に</li>
+                <li>英数字、カタカナ、記号すべてに対応</li>
+            </ul>
+        </section>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        function toHankaku() {
+            const input = document.getElementById('input-text').value;
+            // Full-width alphanumeric/symbol to half-width
+            let result = input.replace(/[\uff01-\uff5e]/g, ch =>
+                String.fromCharCode(ch.charCodeAt(0) - 0xfee0)
+            );
+            // Full-width space to half-width
+            result = result.replace(/\u3000/g, ' ');
+            // Full-width katakana to half-width
+            const kanaMap = { 'ア': 'ｱ', 'イ': 'ｲ', 'ウ': 'ｳ', 'エ': 'ｴ', 'オ': 'ｵ', 'カ': 'ｶ', 'キ': 'ｷ', 'ク': 'ｸ', 'ケ': 'ｹ', 'コ': 'ｺ', 'サ': 'ｻ', 'シ': 'ｼ', 'ス': 'ｽ', 'セ': 'ｾ', 'ソ': 'ｿ', 'タ': 'ﾀ', 'チ': 'ﾁ', 'ツ': 'ﾂ', 'テ': 'ﾃ', 'ト': 'ﾄ', 'ナ': 'ﾅ', 'ニ': 'ﾆ', 'ヌ': 'ﾇ', 'ネ': 'ﾈ', 'ノ': 'ﾉ', 'ハ': 'ﾊ', 'ヒ': 'ﾋ', 'フ': 'ﾌ', 'ヘ': 'ﾍ', 'ホ': 'ﾎ', 'マ': 'ﾏ', 'ミ': 'ﾐ', 'ム': 'ﾑ', 'メ': 'ﾒ', 'モ': 'ﾓ', 'ヤ': 'ﾔ', 'ユ': 'ﾕ', 'ヨ': 'ﾖ', 'ラ': 'ﾗ', 'リ': 'ﾘ', 'ル': 'ﾙ', 'レ': 'ﾚ', 'ロ': 'ﾛ', 'ワ': 'ﾜ', 'ヲ': 'ｦ', 'ン': 'ﾝ', 'ー': 'ｰ', '。': '｡', '「': '｢', '」': '｣', '、': '､', '・': '･' };
+            result = result.replace(/[ア-ンー。「」、・]/g, ch => kanaMap[ch] || ch);
+            document.getElementById('output-text').value = result;
+        }
+
+        function toZenkaku() {
+            const input = document.getElementById('input-text').value;
+            // Half-width alphanumeric/symbol to full-width
+            let result = input.replace(/[\x21-\x7e]/g, ch =>
+                String.fromCharCode(ch.charCodeAt(0) + 0xfee0)
+            );
+            // Half-width space to full-width
+            result = result.replace(/ /g, '\u3000');
+            // Half-width katakana to full-width
+            const kanaMap = { 'ｱ': 'ア', 'ｲ': 'イ', 'ｳ': 'ウ', 'ｴ': 'エ', 'ｵ': 'オ', 'ｶ': 'カ', 'ｷ': 'キ', 'ｸ': 'ク', 'ｹ': 'ケ', 'ｺ': 'コ', 'ｻ': 'サ', 'ｼ': 'シ', 'ｽ': 'ス', 'ｾ': 'セ', 'ｿ': 'ソ', 'ﾀ': 'タ', 'ﾁ': 'チ', 'ﾂ': 'ツ', 'ﾃ': 'テ', 'ﾄ': 'ト', 'ﾅ': 'ナ', 'ﾆ': 'ニ', 'ﾇ': 'ヌ', 'ﾈ': 'ネ', 'ﾉ': 'ノ', 'ﾊ': 'ハ', 'ﾋ': 'ヒ', 'ﾌ': 'フ', 'ﾍ': 'ヘ', 'ﾎ': 'ホ', 'ﾏ': 'マ', 'ﾐ': 'ミ', 'ﾑ': 'ム', 'ﾒ': 'メ', 'ﾓ': 'モ', 'ﾔ': 'ヤ', 'ﾕ': 'ユ', 'ﾖ': 'ヨ', 'ﾗ': 'ラ', 'ﾘ': 'リ', 'ﾙ': 'ル', 'ﾚ': 'レ', 'ﾛ': 'ロ', 'ﾜ': 'ワ', 'ｦ': 'ヲ', 'ﾝ': 'ン', 'ｰ': 'ー', '｡': '。', '｢': '「', '｣': '」', '､': '、', '･': '・' };
+            result = result.replace(/[ｱ-ﾝｰ｡｢｣､･ｦ]/g, ch => kanaMap[ch] || ch);
+            document.getElementById('output-text').value = result;
+        }
+
+        function copyResult() {
+            const text = document.getElementById('output-text').value;
+            copyToClipboard(text, document.getElementById('copy-btn'));
+        }
+
+        document.addEventListener('DOMContentLoaded', () => renderRelatedTools('zenkaku-hankaku'));
+    </script>
+</body>
+
+</html>

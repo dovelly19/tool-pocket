@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カラーコード変換 - HEX・RGB・HSLを相互変換 | ToolPocket</title>
+    <meta name="description" content="カラーコード（HEX、RGB、HSL）を瞬時に相互変換。カラーピッカー搭載。Webデザインや開発に便利。完全無料。">
+    <meta name="keywords" content="カラーコード変換,HEX RGB 変換,色コード,カラーピッカー,RGB変換">
+    <link rel="canonical" href="https://toolpocket.vercel.app/color-code/">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / カラーコード変換</div>
+            <h1>🎨 カラーコード変換</h1>
+            <p class="tool-desc">HEX、RGB、HSLのカラーコードを相互に変換します。カラーピッカーでも色を選べます。</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+            <div class="color-preview" id="color-preview" style="background:#6c5ce7;"></div>
+
+            <div class="form-group">
+                <label>カラーピッカー</label>
+                <input type="color" id="color-picker" value="#6c5ce7"
+                    style="width:100%;height:50px;border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;background:none;">
+            </div>
+
+            <div class="form-group">
+                <label for="hex-input">HEX</label>
+                <div style="display:flex;gap:8px;">
+                    <input type="text" id="hex-input" value="#6c5ce7" placeholder="#000000">
+                    <button class="copy-btn" onclick="copyColor('hex')">コピー</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>RGB</label>
+                <div class="form-row" style="grid-template-columns:1fr 1fr 1fr;gap:8px;">
+                    <input type="number" id="r-input" placeholder="R" min="0" max="255" value="108">
+                    <input type="number" id="g-input" placeholder="G" min="0" max="255" value="92">
+                    <input type="number" id="b-input" placeholder="B" min="0" max="255" value="231">
+                </div>
+                <div style="display:flex;gap:8px;margin-top:8px;">
+                    <input type="text" id="rgb-output" value="rgb(108, 92, 231)" readonly style="flex:1;">
+                    <button class="copy-btn" onclick="copyColor('rgb')">コピー</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>HSL</label>
+                <div style="display:flex;gap:8px;">
+                    <input type="text" id="hsl-output" value="hsl(247, 75%, 63%)" readonly style="flex:1;">
+                    <button class="copy-btn" onclick="copyColor('hsl')">コピー</button>
+                </div>
+            </div>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>カラーコードについて</h2>
+            <p>Web開発やデザインでは、色を指定するためにさまざまな形式のカラーコードが使用されます。</p>
+            <ul>
+                <li><strong>HEX</strong>: #RRGGBB形式。CSSで最もよく使われる</li>
+                <li><strong>RGB</strong>: Red, Green, Blueの3値（0-255）で色を指定</li>
+                <li><strong>HSL</strong>: Hue（色相）, Saturation（彩度）, Lightness（明度）で指定</li>
+            </ul>
+        </section>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        function hexToRgb(hex) {
+            hex = hex.replace('#', '');
+            if (hex.length === 3) hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+            return {
+                r: parseInt(hex.substr(0, 2), 16),
+                g: parseInt(hex.substr(2, 2), 16),
+                b: parseInt(hex.substr(4, 2), 16)
+            };
+        }
+
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+            if (max === min) { h = s = 0; }
+            else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            return { h: Math.round(h * 360), s: Math.round(s * 100), l: Math.round(l * 100) };
+        }
+
+        function updateFromHex(hex) {
+            const rgb = hexToRgb(hex);
+            if (isNaN(rgb.r)) return;
+            const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+
+            document.getElementById('hex-input').value = hex;
+            document.getElementById('color-picker').value = hex.length === 7 ? hex : '#000000';
+            document.getElementById('r-input').value = rgb.r;
+            document.getElementById('g-input').value = rgb.g;
+            document.getElementById('b-input').value = rgb.b;
+            document.getElementById('rgb-output').value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+            document.getElementById('hsl-output').value = `hsl(${hsl.h}, ${hsl.s}%, ${hsl.l}%)`;
+            document.getElementById('color-preview').style.background = hex;
+        }
+
+        function updateFromRgb() {
+            const r = parseInt(document.getElementById('r-input').value) || 0;
+            const g = parseInt(document.getElementById('g-input').value) || 0;
+            const b = parseInt(document.getElementById('b-input').value) || 0;
+            updateFromHex(rgbToHex(r, g, b));
+        }
+
+        function copyColor(type) {
+            let text = '';
+            if (type === 'hex') text = document.getElementById('hex-input').value;
+            else if (type === 'rgb') text = document.getElementById('rgb-output').value;
+            else if (type === 'hsl') text = document.getElementById('hsl-output').value;
+            navigator.clipboard.writeText(text).then(() => showToast('✅ コピーしました: ' + text));
+        }
+
+        document.getElementById('color-picker').addEventListener('input', e => updateFromHex(e.target.value));
+        document.getElementById('hex-input').addEventListener('input', e => {
+            let v = e.target.value;
+            if (!v.startsWith('#')) v = '#' + v;
+            if (v.length >= 4) updateFromHex(v);
+        });
+        ['r-input', 'g-input', 'b-input'].forEach(id =>
+            document.getElementById(id).addEventListener('input', updateFromRgb)
+        );
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateFromHex('#6c5ce7');
+            renderRelatedTools('color-code');
+        });
+    </script>
+</body>
+
+</html>

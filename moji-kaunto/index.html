@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文字数カウント - 無料オンライン文字数チェッカー | ToolPocket</title>
+    <meta name="description" content="テキストの文字数、単語数、行数、バイト数をリアルタイムでカウント。コピペするだけで即座に結果が表示されます。完全無料・登録不要。">
+    <meta name="keywords" content="文字数カウント,文字数,文字数チェック,文字数数える,ワードカウント">
+    <link rel="canonical" href="https://toolpocket.vercel.app/moji-kaunto/">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / 文字数カウント</div>
+            <h1>📝 文字数カウント</h1>
+            <p class="tool-desc">テキストを入力・貼り付けすると、文字数・単語数・行数・バイト数をリアルタイムで計算します。</p>
+        </div>
+
+        <div class="ad-slot">広告エリア</div>
+
+        <div class="tool-container">
+            <div class="form-group">
+                <label for="text-input">テキストを入力</label>
+                <textarea id="text-input" placeholder="ここにテキストを入力または貼り付けてください..." rows="8"></textarea>
+            </div>
+
+            <div class="result-grid">
+                <div class="result-item">
+                    <div class="val" id="char-count">0</div>
+                    <div class="lbl">文字数</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="char-no-space">0</div>
+                    <div class="lbl">文字数（空白除く）</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="word-count">0</div>
+                    <div class="lbl">単語数</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="line-count">0</div>
+                    <div class="lbl">行数</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="byte-count">0</div>
+                    <div class="lbl">バイト数</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="paragraph-count">0</div>
+                    <div class="lbl">段落数</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="ad-slot">広告エリア</div>
+
+        <section class="info-section">
+            <h2>文字数カウントの使い方</h2>
+            <p>上のテキストエリアに文字を入力するか、テキストをコピーして貼り付けるだけで、リアルタイムに文字数がカウントされます。</p>
+            <h3 style="font-size:15px;margin:16px 0 8px;">こんな時に便利</h3>
+            <ul>
+                <li>Twitter（X）の文字数制限（280文字）をチェックしたい時</li>
+                <li>レポートや論文の文字数を確認したい時</li>
+                <li>ブログ記事のSEO向け文字数を把握したい時</li>
+                <li>メールやメッセージの長さを調整したい時</li>
+            </ul>
+            <p style="margin-top:16px;">すべての処理はブラウザ内で完結するため、入力したテキストが外部に送信されることはありません。安心してご利用ください。</p>
+        </section>
+
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+
+    <script src="../common.js"></script>
+    <script>
+        const textInput = document.getElementById('text-input');
+
+        function updateCounts() {
+            const text = textInput.value;
+            document.getElementById('char-count').textContent = text.length.toLocaleString();
+            document.getElementById('char-no-space').textContent = text.replace(/\s/g, '').length.toLocaleString();
+            // Word count: split by whitespace for English, count CJK chars individually
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('word-count').textContent = words.toLocaleString();
+            document.getElementById('line-count').textContent = text ? text.split('\n').length.toLocaleString() : '0';
+            document.getElementById('byte-count').textContent = new Blob([text]).size.toLocaleString();
+            const paragraphs = text.trim() ? text.trim().split(/\n\s*\n/).length : 0;
+            document.getElementById('paragraph-count').textContent = paragraphs.toLocaleString();
+        }
+
+        textInput.addEventListener('input', updateCounts);
+        document.addEventListener('DOMContentLoaded', () => renderRelatedTools('moji-kaunto'));
+    </script>
+</body>
+
+</html>

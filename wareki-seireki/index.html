@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>和暦⇔西暦変換 - 令和・平成・昭和を西暦に変換 | ToolPocket</title>
+    <meta name="description" content="和暦（令和・平成・昭和・大正・明治）と西暦を瞬時に相互変換。年号早見表つき。完全無料・登録不要のオンラインツール。">
+    <meta name="keywords" content="和暦 西暦 変換,令和 西暦,平成 西暦,昭和 西暦,年号変換">
+    <link rel="canonical" href="https://toolpocket.vercel.app/wareki-seireki/">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / 和暦⇔西暦変換</div>
+            <h1>📅 和暦⇔西暦変換</h1>
+            <p class="tool-desc">和暦（令和・平成・昭和・大正・明治）と西暦を相互に変換できます。</p>
+        </div>
+
+        <div class="ad-slot">広告エリア</div>
+
+        <div class="tool-container">
+            <h3 style="font-size:16px;margin-bottom:16px;">和暦 → 西暦</h3>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="era-select">年号</label>
+                    <select id="era-select">
+                        <option value="reiwa">令和</option>
+                        <option value="heisei">平成</option>
+                        <option value="showa">昭和</option>
+                        <option value="taisho">大正</option>
+                        <option value="meiji">明治</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="wareki-year">年</label>
+                    <input type="number" id="wareki-year" placeholder="例: 6" min="1" max="100" value="6">
+                </div>
+            </div>
+            <div class="result-box" id="wareki-result">
+                <div class="result-value" id="seireki-output">2024</div>
+                <div class="result-label">西暦</div>
+            </div>
+        </div>
+
+        <div class="tool-container">
+            <h3 style="font-size:16px;margin-bottom:16px;">西暦 → 和暦</h3>
+            <div class="form-group">
+                <label for="seireki-year">西暦</label>
+                <input type="number" id="seireki-year" placeholder="例: 2024" min="1868" max="2100" value="2024">
+            </div>
+            <div class="result-box">
+                <div class="result-value" id="wareki-output">令和6年</div>
+                <div class="result-label">和暦</div>
+            </div>
+        </div>
+
+        <div class="tool-container">
+            <h3 style="font-size:16px;margin-bottom:16px;">📋 和暦・西暦 早見表</h3>
+            <div style="overflow-x:auto;">
+                <table style="width:100%;border-collapse:collapse;font-size:14px;" id="era-table"></table>
+            </div>
+        </div>
+
+        <div class="ad-slot">広告エリア</div>
+
+        <section class="info-section">
+            <h2>和暦・西暦変換について</h2>
+            <p>日本の年号（元号）と西暦の対応関係をかんたんに調べられるツールです。書類作成や履歴書の記入時にお役立てください。</p>
+            <ul>
+                <li><strong>令和</strong>: 2019年5月1日〜</li>
+                <li><strong>平成</strong>: 1989年1月8日〜2019年4月30日</li>
+                <li><strong>昭和</strong>: 1926年12月25日〜1989年1月7日</li>
+                <li><strong>大正</strong>: 1912年7月30日〜1926年12月24日</li>
+                <li><strong>明治</strong>: 1868年1月25日〜1912年7月29日</li>
+            </ul>
+        </section>
+
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        const ERAS = {
+            reiwa: { name: '令和', base: 2018 },
+            heisei: { name: '平成', base: 1988 },
+            showa: { name: '昭和', base: 1925 },
+            taisho: { name: '大正', base: 1911 },
+            meiji: { name: '明治', base: 1867 },
+        };
+
+        function warekiToSeireki() {
+            const era = document.getElementById('era-select').value;
+            const year = parseInt(document.getElementById('wareki-year').value) || 1;
+            const seireki = ERAS[era].base + year;
+            document.getElementById('seireki-output').textContent = seireki;
+        }
+
+        function seirekiToWareki() {
+            const year = parseInt(document.getElementById('seireki-year').value) || 2024;
+            let result = '';
+            if (year >= 2019) result = `令和${year - 2018}年`;
+            else if (year >= 1989) result = `平成${year - 1988}年`;
+            else if (year >= 1926) result = `昭和${year - 1925}年`;
+            else if (year >= 1912) result = `大正${year - 1911}年`;
+            else if (year >= 1868) result = `明治${year - 1867}年`;
+            else result = '対応範囲外';
+            document.getElementById('wareki-output').textContent = result;
+        }
+
+        function buildTable() {
+            const table = document.getElementById('era-table');
+            let html = '<tr style="border-bottom:1px solid var(--border);">';
+            html += '<th style="padding:8px;text-align:left;color:var(--text-secondary);">西暦</th>';
+            html += '<th style="padding:8px;text-align:left;color:var(--text-secondary);">和暦</th></tr>';
+            const now = new Date().getFullYear();
+            for (let y = now; y >= now - 20; y--) {
+                let era = '';
+                if (y >= 2019) era = `令和${y - 2018}年`;
+                else if (y >= 1989) era = `平成${y - 1988}年`;
+                else if (y >= 1926) era = `昭和${y - 1925}年`;
+                html += `<tr style="border-bottom:1px solid var(--border);"><td style="padding:8px;">${y}年</td><td style="padding:8px;">${era}</td></tr>`;
+            }
+            table.innerHTML = html;
+        }
+
+        document.getElementById('era-select').addEventListener('change', warekiToSeireki);
+        document.getElementById('wareki-year').addEventListener('input', warekiToSeireki);
+        document.getElementById('seireki-year').addEventListener('input', seirekiToWareki);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            warekiToSeireki();
+            seirekiToWareki();
+            buildTable();
+            renderRelatedTools('wareki-seireki');
+        });
+    </script>
+</body>
+
+</html>

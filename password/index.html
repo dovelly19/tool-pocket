@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>パスワード生成 - 安全なランダムパスワード自動生成 | ToolPocket</title>
+    <meta name="description" content="安全でランダムなパスワードを自動生成。長さ、大文字・小文字・数字・記号の組み合わせを自由に設定できます。完全無料・登録不要。">
+    <meta name="keywords" content="パスワード生成,パスワード自動生成,ランダムパスワード,安全なパスワード">
+    <link rel="canonical" href="https://toolpocket.vercel.app/password/">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / パスワード生成</div>
+            <h1>🔑 パスワード生成</h1>
+            <p class="tool-desc">安全でランダムなパスワードを自動生成します。長さや文字種を自由にカスタマイズできます。</p>
+        </div>
+
+        <div class="ad-slot">広告エリア</div>
+
+        <div class="tool-container">
+            <div class="result-box" style="margin-top:0;">
+                <div id="password-display"
+                    style="font-size:24px;font-weight:700;font-family:monospace;word-break:break-all;color:var(--accent);letter-spacing:1px;">
+                    -</div>
+            </div>
+            <div class="btn-group" style="margin-top:16px;justify-content:center;">
+                <button class="btn btn-primary" onclick="generate()">🔄 再生成</button>
+                <button class="copy-btn" id="copy-btn" onclick="copyPw()">📋 コピー</button>
+            </div>
+
+            <div class="form-group" style="margin-top:24px;">
+                <label>文字数: <span id="len-display">16</span></label>
+                <input type="range" id="pw-length" min="4" max="64" value="16" oninput="updateLen()">
+            </div>
+
+            <div class="toggle-row"><input type="checkbox" id="use-upper" checked><label for="use-upper">大文字
+                    (A-Z)</label></div>
+            <div class="toggle-row"><input type="checkbox" id="use-lower" checked><label for="use-lower">小文字
+                    (a-z)</label></div>
+            <div class="toggle-row"><input type="checkbox" id="use-numbers" checked><label for="use-numbers">数字
+                    (0-9)</label></div>
+            <div class="toggle-row"><input type="checkbox" id="use-symbols" checked><label for="use-symbols">記号
+                    (!@#$%...)</label></div>
+
+            <div style="margin-top:20px;">
+                <label>パスワード強度</label>
+                <div style="height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin-top:8px;">
+                    <div id="strength-bar" style="height:100%;width:0%;transition:all 0.3s;border-radius:4px;"></div>
+                </div>
+                <div id="strength-text" style="font-size:13px;color:var(--text-secondary);margin-top:6px;"></div>
+            </div>
+        </div>
+
+        <div class="ad-slot">広告エリア</div>
+
+        <section class="info-section">
+            <h2>安全なパスワードとは</h2>
+            <p>安全なパスワードには以下の特徴があります：</p>
+            <ul>
+                <li><strong>12文字以上</strong>の長さがある</li>
+                <li><strong>大文字・小文字・数字・記号</strong>を含む</li>
+                <li>辞書に載っている単語を含まない</li>
+                <li>個人情報（名前・誕生日など）を含まない</li>
+                <li>各サービスで<strong>異なるパスワード</strong>を使用する</li>
+            </ul>
+            <p style="margin-top:12px;">
+                このツールで生成されるパスワードは暗号学的に安全な乱数（crypto.getRandomValues）を使用しています。生成されたパスワードはブラウザ内で処理され、外部に送信されることはありません。</p>
+        </section>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        function updateLen() {
+            document.getElementById('len-display').textContent = document.getElementById('pw-length').value;
+            generate();
+        }
+
+        function generate() {
+            const length = parseInt(document.getElementById('pw-length').value);
+            let chars = '';
+            if (document.getElementById('use-upper').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            if (document.getElementById('use-lower').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+            if (document.getElementById('use-numbers').checked) chars += '0123456789';
+            if (document.getElementById('use-symbols').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+            if (!chars) { chars = 'abcdefghijklmnopqrstuvwxyz'; }
+
+            const array = new Uint32Array(length);
+            crypto.getRandomValues(array);
+            let pw = '';
+            for (let i = 0; i < length; i++) {
+                pw += chars[array[i] % chars.length];
+            }
+
+            document.getElementById('password-display').textContent = pw;
+            updateStrength(pw);
+        }
+
+        function updateStrength(pw) {
+            let score = 0;
+            if (pw.length >= 8) score++;
+            if (pw.length >= 12) score++;
+            if (pw.length >= 16) score++;
+            if (/[A-Z]/.test(pw)) score++;
+            if (/[a-z]/.test(pw)) score++;
+            if (/[0-9]/.test(pw)) score++;
+            if (/[^A-Za-z0-9]/.test(pw)) score++;
+
+            const bar = document.getElementById('strength-bar');
+            const text = document.getElementById('strength-text');
+            const pct = Math.min((score / 7) * 100, 100);
+            bar.style.width = pct + '%';
+
+            if (score <= 2) { bar.style.background = 'var(--accent-red)'; text.textContent = '⚠️ 弱い'; }
+            else if (score <= 4) { bar.style.background = 'var(--accent-orange)'; text.textContent = '⚡ 普通'; }
+            else if (score <= 5) { bar.style.background = 'var(--accent-green)'; text.textContent = '✅ 強い'; }
+            else { bar.style.background = '#00cec9'; text.textContent = '🛡️ 非常に強い'; }
+        }
+
+        function copyPw() {
+            const pw = document.getElementById('password-display').textContent;
+            copyToClipboard(pw, document.getElementById('copy-btn'));
+        }
+
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.addEventListener('change', generate));
+
+        document.addEventListener('DOMContentLoaded', () => {
+            generate();
+            renderRelatedTools('password');
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToolPocket - 無料オンラインツール集 | 便利ツールをブラウザで</title>
+    <meta name="description" content="文字数カウント、和暦西暦変換、パスワード生成、QRコード作成など、無料で使える便利なオンラインツール集。すべてブラウザ内で動作し、データ送信なしで安全です。">
+    <meta name="keywords" content="オンラインツール,文字数カウント,和暦西暦変換,パスワード生成,QRコード,割り勘計算,BMI計算">
+    <meta property="og:title" content="ToolPocket - 無料オンラインツール集">
+    <meta property="og:description" content="すべてブラウザで動く、安全・無料の便利ツール集">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://toolpocket.vercel.app/">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+
+    <main class="main-content">
+        <section class="hero">
+            <h1>🧰 無料オンラインツール集</h1>
+            <p>すべてのツールがブラウザ内で完結。データは一切サーバーに送信されません。安全・高速・完全無料。</p>
+        </section>
+
+        <div class="ad-slot" id="ad-top">広告エリア</div>
+
+        <div class="tool-grid" id="tool-grid"></div>
+
+        <div class="ad-slot" id="ad-bottom">広告エリア</div>
+
+        <section class="info-section" style="margin-top:32px;">
+            <h2>ToolPocketについて</h2>
+            <p>ToolPocketは、日常的に必要になる計算や変換をブラウザ上で手軽に行える無料ツール集です。すべての処理はお使いのブラウザ内で完結するため、入力データがサーバーに送信されることはありません。</p>
+            <h3 style="font-size:15px;margin:16px 0 8px;">特徴</h3>
+            <ul>
+                <li><strong>完全無料</strong> - すべてのツールを無料でご利用いただけます</li>
+                <li><strong>安全</strong> - データはブラウザ内で処理され、外部に送信されません</li>
+                <li><strong>高速</strong> - サーバー通信不要のため、瞬時に結果が表示されます</li>
+                <li><strong>モバイル対応</strong> - スマートフォンからも快適にご利用いただけます</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="site-footer"></footer>
+
+    <script src="common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('tool-grid');
+            grid.innerHTML = TOOLS.map(t => `
+                <a href="${t.id}/" class="tool-card">
+                    <span class="tool-icon">${t.icon}</span>
+                    <h3>${t.name}</h3>
+                    <p>${t.desc}</p>
+                </a>
+            `).join('');
+        });
+    </script>
+</body>
+
+</html>

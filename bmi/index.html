@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI計算 - 身長と体重からBMIを算出 | ToolPocket</title>
+    <meta name="description" content="身長と体重を入力するだけでBMI（肥満度）を計算。適正体重や肥満度の判定も表示。完全無料・登録不要。">
+    <meta name="keywords" content="BMI計算,BMI,肥満度,適正体重,体重 身長">
+    <link rel="canonical" href="https://toolpocket.vercel.app/bmi/">
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / BMI計算</div>
+            <h1>⚖️ BMI計算</h1>
+            <p class="tool-desc">身長と体重を入力すると、BMI（Body Mass Index）と肥満度の判定を表示します。</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="height">身長 (cm)</label>
+                    <input type="number" id="height" placeholder="例: 170" value="170" step="0.1">
+                </div>
+                <div class="form-group">
+                    <label for="weight">体重 (kg)</label>
+                    <input type="number" id="weight" placeholder="例: 65" value="65" step="0.1">
+                </div>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="calcBMI()">計算する</button>
+
+            <div class="result-box" id="result" style="display:none;">
+                <div class="result-value" id="bmi-value">-</div>
+                <div class="result-label">BMI</div>
+                <div id="bmi-category" style="font-size:16px;font-weight:700;margin-top:8px;">-</div>
+            </div>
+            <div class="result-grid" id="details" style="display:none;">
+                <div class="result-item">
+                    <div class="val" id="ideal-weight">-</div>
+                    <div class="lbl">適正体重 (BMI22)</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="weight-diff">-</div>
+                    <div class="lbl">適正体重との差</div>
+                </div>
+                <div class="result-item">
+                    <div class="val" id="ideal-bmi-range">-</div>
+                    <div class="lbl">標準BMI範囲</div>
+                </div>
+            </div>
+
+            <!-- BMI Scale -->
+            <div style="margin-top:24px;">
+                <div style="display:flex;height:12px;border-radius:6px;overflow:hidden;">
+                    <div style="flex:3;background:#3498db;"></div>
+                    <div style="flex:7;background:var(--accent-green);"></div>
+                    <div style="flex:5;background:var(--accent-orange);"></div>
+                    <div style="flex:5;background:var(--accent-red);"></div>
+                    <div style="flex:5;background:#c0392b;"></div>
+                </div>
+                <div style="display:flex;font-size:11px;color:var(--text-muted);margin-top:4px;">
+                    <div style="flex:3;text-align:center;">痩せ</div>
+                    <div style="flex:7;text-align:center;">標準</div>
+                    <div style="flex:5;text-align:center;">肥満1</div>
+                    <div style="flex:5;text-align:center;">肥満2</div>
+                    <div style="flex:5;text-align:center;">肥満3+</div>
+                </div>
+            </div>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>BMIとは</h2>
+            <p>BMI（Body Mass Index）は、体重と身長の関係から算出される肥満度を表す指標です。日本肥満学会の基準では以下のように分類されます：</p>
+            <ul>
+                <li><strong>18.5未満</strong>: 低体重（痩せ型）</li>
+                <li><strong>18.5〜24.9</strong>: 普通体重</li>
+                <li><strong>25.0〜29.9</strong>: 肥満（1度）</li>
+                <li><strong>30.0〜34.9</strong>: 肥満（2度）</li>
+                <li><strong>35.0以上</strong>: 肥満（3度以上）</li>
+            </ul>
+            <p>計算式: BMI = 体重(kg) ÷ 身長(m)²</p>
+        </section>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        function calcBMI() {
+            const h = parseFloat(document.getElementById('height').value) / 100;
+            const w = parseFloat(document.getElementById('weight').value);
+            if (!h || !w) return;
+
+            const bmi = w / (h * h);
+            document.getElementById('bmi-value').textContent = bmi.toFixed(1);
+
+            let category = '';
+            let color = '';
+            if (bmi < 18.5) { category = '低体重（痩せ型）'; color = '#3498db'; }
+            else if (bmi < 25) { category = '普通体重'; color = 'var(--accent-green)'; }
+            else if (bmi < 30) { category = '肥満（1度）'; color = 'var(--accent-orange)'; }
+            else if (bmi < 35) { category = '肥満（2度）'; color = 'var(--accent-red)'; }
+            else { category = '肥満（3度以上）'; color = '#c0392b'; }
+
+            document.getElementById('bmi-category').textContent = category;
+            document.getElementById('bmi-category').style.color = color;
+
+            const ideal = 22 * h * h;
+            document.getElementById('ideal-weight').textContent = ideal.toFixed(1) + 'kg';
+            const diff = w - ideal;
+            document.getElementById('weight-diff').textContent = (diff >= 0 ? '+' : '') + diff.toFixed(1) + 'kg';
+            document.getElementById('ideal-bmi-range').textContent = '18.5〜24.9';
+
+            document.getElementById('result').style.display = '';
+            document.getElementById('details').style.display = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            calcBMI();
+            renderRelatedTools('bmi');
+        });
+    </script>
+</body>
+
+</html>

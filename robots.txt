@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://toolpocket.vercel.app/sitemap.xml
