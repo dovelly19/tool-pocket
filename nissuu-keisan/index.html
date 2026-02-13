@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>日数計箁E- 2つの日付間の日数を計箁E| ToolPocket</title>
-    <meta name="description" content="2つの日付間の日数を瞬時に計算。何日後�E何日前�E日付も計算できます。完�E無料�E登録不要、E>
+    <meta name="description" content="2つの日付間の日数を瞬時に計算。何日後�E何日前�E日付も計算できます。完�E無料�E登録不要、E>
     <meta name="keywords" content="日数計箁E日数,あと何日,日仁E差,何日閁E>
     <link rel="canonical" href="https://tool-pocket-neon.vercel.app/nissuu-keisan/">
     <link rel="stylesheet" href="../style.css">
@@ -16,11 +16,11 @@
     <main class="main-content">
         <div class="tool-page-header">
             <div class="breadcrumb"><a href="../">ToolPocket</a> / 日数計箁E/div>
-            <h1>⏱�E�E日数計箁E/h1>
-            <p class="tool-desc">2つの日付�E間�E日数を計算します。「あと何日」を即座に確認できます、E/p>
+            <h1>⏱�E�E日数計箁E/h1>
+            <p class="tool-desc">2つの日付�E間�E日数を計算します。「あと何日」を即座に確認できます、E/p>
         </div>
 
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">庁E��エリア</div>
 
         <div class="tool-container">
             <h3 style="font-size:16px;margin-bottom:16px;">日付間の日数</h3>
@@ -30,7 +30,7 @@
                     <input type="date" id="date-from">
                 </div>
                 <div class="form-group">
-                    <label for="date-to">終亁E��</label>
+                    <label for="date-to">終亁E��</label>
                     <input type="date" id="date-to">
                 </div>
             </div>
@@ -56,14 +56,14 @@
         </div>
 
         <div class="tool-container">
-            <h3 style="font-size:16px;margin-bottom:16px;">○日後�E日仁E/h3>
+            <h3 style="font-size:16px;margin-bottom:16px;">○日後�E日仁E/h3>
             <div class="form-row">
                 <div class="form-group">
                     <label for="base-date">基準日</label>
                     <input type="date" id="base-date">
                 </div>
                 <div class="form-group">
-                    <label for="add-days">日数�E�！E−！E/label>
+                    <label for="add-days">日数�E�！E−！E/label>
                     <input type="number" id="add-days" value="30" placeholder="侁E 30">
                 </div>
             </div>
@@ -74,19 +74,19 @@
             </div>
         </div>
 
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">庁E��エリア</div>
 
         <section class="info-section">
-            <h2>日数計算�E使ぁE��</h2>
-            <p>2つの日付を入力して「計算する」�Eタンを押すと、その間�E日数が表示されます。また、基準日から何日後（何日前）�E日付を計算することもできます、E/p>
+            <h2>日数計算�E使ぁE��</h2>
+            <p>2つの日付を入力して「計算する」�Eタンを押すと、その間�E日数が表示されます。また、基準日から何日後（何日前）�E日付を計算することもできます、E/p>
             <ul>
                 <li>イベントまでのカウントダウンに</li>
-                <li>契紁E��間�E日数確認に</li>
+                <li>契紁E��間�E日数確認に</li>
                 <li>妊娠週数の計算に</li>
-                <li>プロジェクト�E期間管琁E��</li>
+                <li>プロジェクト�E期間管琁E��</li>
             </ul>
         </section>
-        <div class="related-tools" id="related-tools"></div>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div><div class="related-tools" id="related-tools"></div>
     </main>
     <footer class="site-footer" id="site-footer"></footer>
     <script src="../common.js"></script>
@@ -123,13 +123,14 @@
             result.setDate(result.getDate() + days);
             const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
             document.getElementById('added-date').textContent = result.toLocaleDateString('ja-JP', options);
-            document.getElementById('added-label').textContent = days >= 0 ? `${days}日後�E日付` : `${Math.abs(days)}日前�E日付`;
+            document.getElementById('added-label').textContent = days >= 0 ? `${days}日後�E日付` : `${Math.abs(days)}日前�E日付`;
             document.getElementById('result2').style.display = '';
         }
 
         document.addEventListener('DOMContentLoaded', () => {
             calcDays();
             calcAdd();
+            renderAffiliateLinks('nissuu-keisan');
             renderRelatedTools('nissuu-keisan');
         });
     </script>

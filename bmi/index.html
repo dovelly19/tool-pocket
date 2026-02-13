@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI計箁E- 身長と体重からBMIを算�E | ToolPocket</title>
-    <meta name="description" content="身長と体重を�E力するだけでBMI�E�肥満度�E�を計算。適正体重めE��満度の判定も表示。完�E無料�E登録不要、E>
+    <title>BMI計箁E- 身長と体重からBMIを算�E | ToolPocket</title>
+    <meta name="description" content="身長と体重を�E力するだけでBMI�E�肥満度�E�を計算。適正体重めE��満度の判定も表示。完�E無料�E登録不要、E>
     <meta name="keywords" content="BMI計箁EBMI,肥満度,適正体重,体重 身長">
     <link rel="canonical" href="https://tool-pocket-neon.vercel.app/bmi/">
     <link rel="stylesheet" href="../style.css">
@@ -17,9 +17,9 @@
         <div class="tool-page-header">
             <div class="breadcrumb"><a href="../">ToolPocket</a> / BMI計箁E/div>
             <h1>⚖︁EBMI計箁E/h1>
-            <p class="tool-desc">身長と体重を�E力すると、BMI�E�Eody Mass Index�E�と肥満度の判定を表示します、E/p>
+            <p class="tool-desc">身長と体重を�E力すると、BMI�E�Eody Mass Index�E�と肥満度の判定を表示します、E/p>
         </div>
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">庁E��エリア</div>
         <div class="tool-container">
             <div class="form-row">
                 <div class="form-group">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="result-item">
                     <div class="val" id="ideal-bmi-range">-</div>
-                    <div class="lbl">標準BMI篁E��</div>
+                    <div class="lbl">標準BMI篁E��</div>
                 </div>
             </div>
 
@@ -71,20 +71,20 @@
                 </div>
             </div>
         </div>
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">庁E��エリア</div>
         <section class="info-section">
             <h2>BMIとは</h2>
-            <p>BMI�E�Eody Mass Index�E��E、体重と身長の関係から算�Eされる肥満度を表す指標です。日本肥満学会�E基準では以下�Eように刁E��されます！E/p>
+            <p>BMI�E�Eody Mass Index�E��E、体重と身長の関係から算�Eされる肥満度を表す指標です。日本肥満学会�E基準では以下�Eように刁E��されます！E/p>
             <ul>
-                <li><strong>18.5未満</strong>: 低体重�E�痩せ型�E�E/li>
+                <li><strong>18.5未満</strong>: 低体重�E�痩せ型�E�E/li>
                 <li><strong>18.5、E4.9</strong>: 普通体重</li>
-                <li><strong>25.0、E9.9</strong>: 肥満�E�E度�E�E/li>
-                <li><strong>30.0、E4.9</strong>: 肥満�E�E度�E�E/li>
-                <li><strong>35.0以丁E/strong>: 肥満�E�E度以上！E/li>
+                <li><strong>25.0、E9.9</strong>: 肥満�E�E度�E�E/li>
+                <li><strong>30.0、E4.9</strong>: 肥満�E�E度�E�E/li>
+                <li><strong>35.0以丁E/strong>: 肥満�E�E度以上！E/li>
             </ul>
             <p>計算弁E BMI = 体重(kg) ÷ 身長(m)²</p>
         </section>
-        <div class="related-tools" id="related-tools"></div>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div><div class="related-tools" id="related-tools"></div>
     </main>
     <footer class="site-footer" id="site-footer"></footer>
     <script src="../common.js"></script>
@@ -99,11 +99,11 @@
 
             let category = '';
             let color = '';
-            if (bmi < 18.5) { category = '低体重�E�痩せ型�E�E; color = '#3498db'; }
+            if (bmi < 18.5) { category = '低体重�E�痩せ型�E�E; color = '#3498db'; }
             else if (bmi < 25) { category = '普通体重'; color = 'var(--accent-green)'; }
-            else if (bmi < 30) { category = '肥満�E�E度�E�E; color = 'var(--accent-orange)'; }
-            else if (bmi < 35) { category = '肥満�E�E度�E�E; color = 'var(--accent-red)'; }
-            else { category = '肥満�E�E度以上！E; color = '#c0392b'; }
+            else if (bmi < 30) { category = '肥満�E�E度�E�E; color = 'var(--accent-orange)'; }
+            else if (bmi < 35) { category = '肥満�E�E度�E�E; color = 'var(--accent-red)'; }
+            else { category = '肥満�E�E度以上！E; color = '#c0392b'; }
 
             document.getElementById('bmi-category').textContent = category;
             document.getElementById('bmi-category').style.color = color;
@@ -120,6 +120,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             calcBMI();
+            renderAffiliateLinks('bmi');
             renderRelatedTools('bmi');
         });
     </script>

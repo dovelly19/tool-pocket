@@ -1,11 +1,11 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>和暦⇔西暦変換 - 令和�E平成�E昭和を西暦に変換 | ToolPocket</title>
-    <meta name="description" content="和暦�E�令和�E平成�E昭和�E大正・明治�E�と西暦を瞬時に相互変換。年号早見表つき。完�E無料�E登録不要�EオンラインチE�Eル、E>
+    <title>和暦⇔西暦変換 - 令和�E平成�E昭和を西暦に変換 | ToolPocket</title>
+    <meta name="description" content="和暦�E�令和�E平成�E昭和�E大正・明治�E�と西暦を瞬時に相互変換。年号早見表つき。完�E無料�E登録不要�EオンラインチE�Eル、E>
     <meta name="keywords" content="和暦 西暦 変換,令咁E西暦,平戁E西暦,昭咁E西暦,年号変換">
     <link rel="canonical" href="https://tool-pocket-neon.vercel.app/wareki-seireki/">
     <link rel="stylesheet" href="../style.css">
@@ -17,10 +17,10 @@
         <div class="tool-page-header">
             <div class="breadcrumb"><a href="../">ToolPocket</a> / 和暦⇔西暦変換</div>
             <h1>📅 和暦⇔西暦変換</h1>
-            <p class="tool-desc">和暦�E�令和�E平成�E昭和�E大正・明治�E�と西暦を相互に変換できます、E/p>
+            <p class="tool-desc">和暦�E�令和�E平成�E昭和�E大正・明治�E�と西暦を相互に変換できます、E/p>
         </div>
 
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">庁E��エリア</div>
 
         <div class="tool-container">
             <h3 style="font-size:16px;margin-bottom:16px;">和暦 ↁE西暦</h3>
@@ -65,11 +65,11 @@
             </div>
         </div>
 
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">庁E��エリア</div>
 
         <section class="info-section">
-            <h2>和暦・西暦変換につぁE��</h2>
-            <p>日本の年号�E��E号�E�と西暦の対応関係をかんたんに調べられるツールです。書類作�EめE��歴書の記�E時にお役立てください、E/p>
+            <h2>和暦・西暦変換につぁE��</h2>
+            <p>日本の年号�E��E号�E�と西暦の対応関係をかんたんに調べられるツールです。書類作�EめE��歴書の記�E時にお役立てください、E/p>
             <ul>
                 <li><strong>令咁E/strong>: 2019年5朁E日、E/li>
                 <li><strong>平戁E/strong>: 1989年1朁E日、E019年4朁E0日</li>
@@ -79,7 +79,7 @@
             </ul>
         </section>
 
-        <div class="related-tools" id="related-tools"></div>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div><div class="related-tools" id="related-tools"></div>
     </main>
     <footer class="site-footer" id="site-footer"></footer>
     <script src="../common.js"></script>
@@ -107,7 +107,7 @@
             else if (year >= 1926) result = `昭咁E{year - 1925}年`;
             else if (year >= 1912) result = `大正${year - 1911}年`;
             else if (year >= 1868) result = `明治${year - 1867}年`;
-            else result = '対応篁E��夁E;
+            else result = '対応篁E��夁E;
             document.getElementById('wareki-output').textContent = result;
         }
 
@@ -135,6 +135,7 @@
             warekiToSeireki();
             seirekiToWareki();
             buildTable();
+            renderAffiliateLinks('wareki-seireki');
             renderRelatedTools('wareki-seireki');
         });
     </script>
