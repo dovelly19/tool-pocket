@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ランダム数生成 - 乱数ジェネレーター | ToolPocket</title>
+    <meta name="description" content="指定した範囲でランダムな数値を生成。くじ引き・抽選・ゲームに便利。暗号学的に安全な乱数を使用。">
+    <meta name="keywords" content="ランダム数,乱数生成,抽選,くじ引き,ランダム">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/random-number/">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7683631139894961" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / ランダム数生成</div>
+            <h1>🎲 ランダム数生成</h1>
+            <p class="tool-desc">指定範囲のランダムな数値を生成</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+                <div class="result-box" style="margin-top:0;text-align:center;">
+                    <div id="random-result" style="font-size:48px;font-weight:700;color:var(--accent);">-</div>
+                </div>
+                <div class="form-row" style="margin-top:16px;">
+                    <div class="form-group"><label for="rand-min">最小値</label><input type="number" id="rand-min" value="1"></div>
+                    <div class="form-group"><label for="rand-max">最大値</label><input type="number" id="rand-max" value="100"></div>
+                    <div class="form-group"><label for="rand-count">個数</label><input type="number" id="rand-count" value="1" min="1" max="100"></div>
+                </div>
+                <button class="btn btn-primary btn-block" onclick="genRandom()">🎲 生成する</button>
+                <div id="random-history" style="margin-top:16px;font-size:13px;color:var(--text-muted);"></div>
+            </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>ランダム数生成について</h2>
+            <p>このツールは<strong>crypto.getRandomValues</strong>を使った暗号学的に安全な乱数を生成します。くじ引き、抽選、ゲームのサイコロなどにお使いいただけます。</p>
+        </section>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        const history = [];
+            function genRandom() {
+                const min = parseInt(document.getElementById('rand-min').value);
+                const max = parseInt(document.getElementById('rand-max').value);
+                const count = Math.min(parseInt(document.getElementById('rand-count').value) || 1, 100);
+                if (min > max) return;
+                const range = max - min + 1;
+                const arr = new Uint32Array(count);
+                crypto.getRandomValues(arr);
+                const results = Array.from(arr).map(v => min + (v % range));
+                document.getElementById('random-result').textContent = results.join(', ');
+                history.unshift(results.join(', '));
+                if (history.length > 10) history.pop();
+                document.getElementById('random-history').innerHTML = '<strong>履歴:</strong><br>' + history.join('<br>');
+            }
+            genRandom();
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAffiliateLinks('random-number');
+            renderRelatedTools('random-number');
+        });
+    </script>
+</body>
+
+</html>

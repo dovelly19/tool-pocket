@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64変換 - エンコード/デコード | ToolPocket</title>
+    <meta name="description" content="テキストをBase64にエンコード・デコード。プログラミングやデータ変換に便利。完全無料。">
+    <meta name="keywords" content="Base64,エンコード,デコード,Base64変換,データ変換">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/base64/">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7683631139894961" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / Base64変換</div>
+            <h1>🔐 Base64変換</h1>
+            <p class="tool-desc">テキストをBase64にエンコード/デコード</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+                <div class="form-group"><label for="b64-input">入力テキスト</label><textarea id="b64-input" rows="4" placeholder="テキストを入力" style="font-family:monospace;"></textarea></div>
+                <div class="btn-group" style="justify-content:center;margin:16px 0;">
+                    <button class="btn btn-primary" onclick="b64Encode()">エンコード ↓</button>
+                    <button class="btn btn-primary" onclick="b64Decode()">デコード ↑</button>
+                </div>
+                <div class="form-group"><label>結果</label><textarea id="b64-output" rows="4" readonly style="font-family:monospace;"></textarea></div>
+                <button class="copy-btn" id="copy-btn" onclick="copyB64()">📋 結果をコピー</button>
+            </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>Base64とは</h2>
+            <p>Base64は、バイナリデータをASCII文字列に変換するエンコード方式です。メールの添付ファイル、画像のData URI、APIの認証トークンなどで広く使われています。</p>
+        </section>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        function b64Encode() {
+                try { document.getElementById('b64-output').value = btoa(unescape(encodeURIComponent(document.getElementById('b64-input').value))); }
+                catch(e) { document.getElementById('b64-output').value = 'エラー: ' + e.message; }
+            }
+            function b64Decode() {
+                try { document.getElementById('b64-output').value = decodeURIComponent(escape(atob(document.getElementById('b64-input').value))); }
+                catch(e) { document.getElementById('b64-output').value = 'デコードエラー: 無効なBase64文字列です'; }
+            }
+            function copyB64() { copyToClipboard(document.getElementById('b64-output').value, document.getElementById('copy-btn')); }
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAffiliateLinks('base64');
+            renderRelatedTools('base64');
+        });
+    </script>
+</body>
+
+</html>

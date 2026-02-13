@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ローン計算 - 住宅ローン返済額シミュレーション | ToolPocket</title>
+    <meta name="description" content="住宅ローンや借入の返済額をかんたん計算。月々の返済額、総返済額、利息総額を算出。完全無料。">
+    <meta name="keywords" content="ローン計算,住宅ローン計算,返済額計算,ローンシミュレーション">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/loan-keisan/">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7683631139894961" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / ローン計算</div>
+            <h1>🏦 ローン計算</h1>
+            <p class="tool-desc">住宅ローン・借入の返済額を計算</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+                <div class="form-group"><label for="principal">借入金額（万円）</label><input type="number" id="principal" placeholder="例: 3000" value="3000"></div>
+                <div class="form-group"><label for="interest">年利（%）</label><input type="number" id="interest" placeholder="例: 1.5" value="1.5" step="0.1"></div>
+                <div class="form-group"><label for="years">返済期間（年）</label><input type="number" id="years" placeholder="例: 35" value="35"></div>
+                <button class="btn btn-primary btn-block" onclick="calcLoan()">計算する</button>
+                <div class="result-grid" id="result" style="display:none;">
+                    <div class="result-item"><div class="val" id="monthly">-</div><div class="lbl">月々の返済額</div></div>
+                    <div class="result-item"><div class="val" id="total">-</div><div class="lbl">総返済額</div></div>
+                    <div class="result-item"><div class="val" id="total-interest">-</div><div class="lbl">利息総額</div></div>
+                </div>
+            </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>ローン計算について</h2>
+            <p>元利均等返済方式での月々の返済額を計算します。計算式: 月々返済額 = 借入額 × 月利 × (1+月利)^回数 ÷ ((1+月利)^回数 - 1)</p>
+        </section>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        function calcLoan() {
+                const p = parseFloat(document.getElementById('principal').value) * 10000;
+                const r = parseFloat(document.getElementById('interest').value) / 100 / 12;
+                const n = parseInt(document.getElementById('years').value) * 12;
+                if (!p || !r || !n) return;
+                const monthly = p * r * Math.pow(1+r,n) / (Math.pow(1+r,n) - 1);
+                const total = monthly * n;
+                document.getElementById('monthly').textContent = Math.round(monthly).toLocaleString() + '円';
+                document.getElementById('total').textContent = Math.round(total).toLocaleString() + '円';
+                document.getElementById('total-interest').textContent = Math.round(total - p).toLocaleString() + '円';
+                document.getElementById('result').style.display = '';
+            }
+            calcLoan();
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAffiliateLinks('loan-keisan');
+            renderRelatedTools('loan-keisan');
+        });
+    </script>
+</body>
+
+</html>

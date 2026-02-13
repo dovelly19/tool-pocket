@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>単位変換 - 長さ・重さ・温度の変換 | ToolPocket</title>
+    <meta name="description" content="長さ（km⇔miles）、重さ（kg⇔lbs）、温度（℃⇔℉）などの単位をかんたん変換。完全無料。">
+    <meta name="keywords" content="単位変換,km マイル 変換,kg ポンド 変換,摂氏 華氏 変換">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/tani-henkan/">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7683631139894961" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / 単位変換</div>
+            <h1>📏 単位変換</h1>
+            <p class="tool-desc">長さ・重さ・温度などを一括変換</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+                <div class="form-group">
+                    <label for="category">カテゴリ</label>
+                    <select id="category" onchange="updateUnits()">
+                        <option value="length">長さ</option>
+                        <option value="weight">重さ</option>
+                        <option value="temperature">温度</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="val-from">変換元</label><input type="number" id="val-from" placeholder="値を入力" oninput="convert()"></div>
+                    <div class="form-group"><label for="unit-from">単位</label><select id="unit-from" onchange="convert()"></select></div>
+                </div>
+                <div style="text-align:center;font-size:24px;margin:8px 0;">⇅</div>
+                <div class="form-row">
+                    <div class="form-group"><label>結果</label><div class="result-box" style="margin-top:0;"><span id="result-val" style="font-size:28px;font-weight:700;color:var(--accent);">-</span></div></div>
+                    <div class="form-group"><label for="unit-to">単位</label><select id="unit-to" onchange="convert()"></select></div>
+                </div>
+            </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>単位変換について</h2>
+            <p>日常でよく使う単位の変換をまとめました。海外旅行やレシピの換算に便利です。</p>
+        </section>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        const units = {
+                length: [{n:'メートル (m)',f:1},{n:'キロメートル (km)',f:0.001},{n:'センチメートル (cm)',f:100},{n:'ミリメートル (mm)',f:1000},{n:'インチ (in)',f:39.3701},{n:'フィート (ft)',f:3.28084},{n:'ヤード (yd)',f:1.09361},{n:'マイル (mi)',f:0.000621371}],
+                weight: [{n:'グラム (g)',f:1},{n:'キログラム (kg)',f:0.001},{n:'ミリグラム (mg)',f:1000},{n:'トン (t)',f:0.000001},{n:'ポンド (lb)',f:0.00220462},{n:'オンス (oz)',f:0.035274}],
+                temperature: [{n:'摂氏 (°C)',f:'C'},{n:'華氏 (°F)',f:'F'},{n:'ケルビン (K)',f:'K'}]
+            };
+            function updateUnits() {
+                const cat = document.getElementById('category').value;
+                const u = units[cat];
+                ['unit-from','unit-to'].forEach((id,i) => {
+                    const sel = document.getElementById(id);
+                    sel.innerHTML = u.map((x,j) => '<option value="'+j+'"'+(j===i?'selected':'')+'>'+x.n+'</option>').join('');
+                });
+                convert();
+            }
+            function convert() {
+                const cat = document.getElementById('category').value;
+                const v = parseFloat(document.getElementById('val-from').value);
+                if (isNaN(v)) { document.getElementById('result-val').textContent = '-'; return; }
+                const fi = parseInt(document.getElementById('unit-from').value);
+                const ti = parseInt(document.getElementById('unit-to').value);
+                const u = units[cat];
+                let result;
+                if (cat === 'temperature') {
+                    let celsius = v;
+                    if (u[fi].f === 'F') celsius = (v - 32) * 5/9;
+                    else if (u[fi].f === 'K') celsius = v - 273.15;
+                    if (u[ti].f === 'F') result = celsius * 9/5 + 32;
+                    else if (u[ti].f === 'K') result = celsius + 273.15;
+                    else result = celsius;
+                } else {
+                    result = v / u[fi].f * u[ti].f;
+                }
+                document.getElementById('result-val').textContent = parseFloat(result.toPrecision(8));
+            }
+            updateUnits();
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAffiliateLinks('tani-henkan');
+            renderRelatedTools('tani-henkan');
+        });
+    </script>
+</body>
+
+</html>

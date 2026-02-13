@@ -11,4 +11,16 @@
     <url><loc>https://tool-pocket-neon.vercel.app/bmi/</loc><priority>0.8</priority></url>
     <url><loc>https://tool-pocket-neon.vercel.app/zenkaku-hankaku/</loc><priority>0.8</priority></url>
     <url><loc>https://tool-pocket-neon.vercel.app/color-code/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/shouhizei/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/tani-henkan/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/url-encode/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/json-format/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/loan-keisan/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/calorie/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/jisa-keisan/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/text-case/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/random-number/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/base64/</loc><priority>0.8</priority></url>
+    <url><loc>https://tool-pocket-neon.vercel.app/privacy/</loc><priority>0.3</priority></url>
 </urlset>
+

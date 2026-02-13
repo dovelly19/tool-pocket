@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消費税計算 - 税込・税抜き価格を計算 | ToolPocket</title>
+    <meta name="description" content="税込・税抜き価格をかんたん計算。10%と軽減税率8%に対応。まとめて計算も可能。完全無料・登録不要。">
+    <meta name="keywords" content="消費税計算,税込計算,税抜き計算,消費税10%,軽減税率8%">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/shouhizei/">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7683631139894961" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / 消費税計算</div>
+            <h1>🧾 消費税計算</h1>
+            <p class="tool-desc">税込・税抜き価格をかんたん計算</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+                <div class="form-group">
+                    <label for="price">金額（円）</label>
+                    <input type="number" id="price" placeholder="例: 1000" step="1">
+                </div>
+                <div class="form-group">
+                    <label>税率</label>
+                    <div class="btn-group">
+                        <button class="btn btn-primary active" id="rate10" onclick="setRate(10)">10%（標準）</button>
+                        <button class="btn" id="rate8" onclick="setRate(8)">8%（軽減）</button>
+                    </div>
+                </div>
+                <div class="result-grid" id="result" style="display:none;">
+                    <div class="result-item"><div class="val" id="tax-inc">-</div><div class="lbl">税込価格</div></div>
+                    <div class="result-item"><div class="val" id="tax-exc">-</div><div class="lbl">税抜価格</div></div>
+                    <div class="result-item"><div class="val" id="tax-amount">-</div><div class="lbl">消費税額</div></div>
+                </div>
+            </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>消費税について</h2>
+            <p>日本の消費税率は<strong>標準税率10%</strong>と<strong>軽減税率8%</strong>の2種類があります。</p>
+            <ul>
+                <li><strong>10%</strong>: 一般的な商品・サービス</li>
+                <li><strong>8%</strong>: 飲食料品（酒類・外食を除く）、新聞（定期購読）</li>
+            </ul>
+            <p>税込価格 = 税抜価格 × (1 + 税率) / 税抜価格 = 税込価格 ÷ (1 + 税率)</p>
+        </section>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        let rate = 10;
+            function setRate(r) {
+                rate = r;
+                document.getElementById('rate10').classList.toggle('active', r === 10);
+                document.getElementById('rate8').classList.toggle('active', r === 8);
+                calc();
+            }
+            function calc() {
+                const p = parseFloat(document.getElementById('price').value);
+                if (!p) return;
+                const taxInc = Math.round(p * (1 + rate / 100));
+                const taxExc = Math.round(p / (1 + rate / 100));
+                const taxAmt = Math.round(p * rate / 100);
+                document.getElementById('tax-inc').textContent = taxInc.toLocaleString() + '円';
+                document.getElementById('tax-exc').textContent = taxExc.toLocaleString() + '円';
+                document.getElementById('tax-amount').textContent = taxAmt.toLocaleString() + '円';
+                document.getElementById('result').style.display = '';
+            }
+            document.getElementById('price').addEventListener('input', calc);
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAffiliateLinks('shouhizei');
+            renderRelatedTools('shouhizei');
+        });
+    </script>
+</body>
+
+</html>

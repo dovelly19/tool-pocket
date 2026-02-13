@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時差計算 - 世界の時差と現地時間 | ToolPocket</title>
+    <meta name="description" content="世界の主要都市の現在時刻と日本との時差を一覧表示。旅行や海外連絡に便利。完全無料。">
+    <meta name="keywords" content="時差計算,世界時計,日本との時差,タイムゾーン">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/jisa-keisan/">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7683631139894961" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / 時差計算</div>
+            <h1>🌍 時差計算</h1>
+            <p class="tool-desc">世界の主要都市との時差を計算</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+                <div style="text-align:center;margin-bottom:16px;">
+                    <div style="font-size:13px;color:var(--text-muted);">日本の現在時刻</div>
+                    <div id="jp-time" style="font-size:32px;font-weight:700;color:var(--accent);"></div>
+                </div>
+                <div id="tz-list"></div>
+            </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>時差について</h2>
+            <p>日本（JST）はUTC+9です。時差は季節によってサマータイムを採用している国では変動します。</p>
+        </section>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        const cities = [
+                {name:'ニューヨーク',tz:'America/New_York',flag:'🇺🇸'},
+                {name:'ロサンゼルス',tz:'America/Los_Angeles',flag:'🇺🇸'},
+                {name:'ロンドン',tz:'Europe/London',flag:'🇬🇧'},
+                {name:'パリ',tz:'Europe/Paris',flag:'🇫🇷'},
+                {name:'ドバイ',tz:'Asia/Dubai',flag:'🇦🇪'},
+                {name:'シンガポール',tz:'Asia/Singapore',flag:'🇸🇬'},
+                {name:'上海',tz:'Asia/Shanghai',flag:'🇨🇳'},
+                {name:'ソウル',tz:'Asia/Seoul',flag:'🇰🇷'},
+                {name:'シドニー',tz:'Australia/Sydney',flag:'🇦🇺'},
+                {name:'ホノルル',tz:'Pacific/Honolulu',flag:'🇺🇸'},
+            ];
+            function updateTimes() {
+                const now = new Date();
+                document.getElementById('jp-time').textContent = now.toLocaleTimeString('ja-JP',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+                const html = cities.map(c => {
+                    const t = now.toLocaleTimeString('ja-JP',{timeZone:c.tz,hour:'2-digit',minute:'2-digit'});
+                    const d = now.toLocaleDateString('ja-JP',{timeZone:c.tz,month:'short',day:'numeric'});
+                    const jh = parseInt(now.toLocaleTimeString('en',{timeZone:'Asia/Tokyo',hour:'numeric',hour12:false}));
+                    const ch = parseInt(now.toLocaleTimeString('en',{timeZone:c.tz,hour:'numeric',hour12:false}));
+                    let diff = ch - jh;
+                    if (diff > 12) diff -= 24;
+                    if (diff < -12) diff += 24;
+                    const diffStr = diff >= 0 ? '+'+diff+'h' : diff+'h';
+                    return '<div style="display:flex;justify-content:space-between;align-items:center;padding:12px;border-bottom:1px solid var(--border);"><div>'+c.flag+' '+c.name+'</div><div style="text-align:right;"><span style="font-size:18px;font-weight:700;color:var(--accent);">'+t+'</span> <span style="font-size:12px;color:var(--text-muted);">'+d+' ('+diffStr+')</span></div></div>';
+                }).join('');
+                document.getElementById('tz-list').innerHTML = html;
+            }
+            updateTimes();
+            setInterval(updateTimes, 1000);
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAffiliateLinks('jisa-keisan');
+            renderRelatedTools('jisa-keisan');
+        });
+    </script>
+</body>
+
+</html>

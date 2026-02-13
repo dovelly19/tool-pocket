@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URLエンコード/デコード - URL文字列変換 | ToolPocket</title>
+    <meta name="description" content="URLの特殊文字をエンコード・デコード。日本語URLの変換にも対応。完全無料・登録不要。">
+    <meta name="keywords" content="URLエンコード,URLデコード,パーセントエンコーディング,URL変換">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/url-encode/">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7683631139894961" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / URLエンコード/デコード</div>
+            <h1>🔗 URLエンコード/デコード</h1>
+            <p class="tool-desc">URLの特殊文字をエンコード・デコード</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+                <div class="form-group"><label for="input-text">入力テキスト</label><textarea id="input-text" rows="4" placeholder="テキストまたはURLを入力"></textarea></div>
+                <div class="btn-group" style="justify-content:center;margin:16px 0;">
+                    <button class="btn btn-primary" onclick="doEncode()">エンコード ↓</button>
+                    <button class="btn btn-primary" onclick="doDecode()">デコード ↑</button>
+                </div>
+                <div class="form-group"><label>結果</label><textarea id="output-text" rows="4" readonly></textarea></div>
+                <button class="copy-btn" id="copy-btn" onclick="copyResult()">📋 結果をコピー</button>
+            </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>URLエンコードとは</h2>
+            <p>URLエンコード（パーセントエンコーディング）は、URLに使用できない文字を<strong>%XX</strong>形式に変換する仕組みです。日本語やスペースなどの特殊文字をURLに含める場合に必要になります。</p>
+        </section>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        function doEncode() { document.getElementById('output-text').value = encodeURIComponent(document.getElementById('input-text').value); }
+            function doDecode() { try { document.getElementById('output-text').value = decodeURIComponent(document.getElementById('input-text').value); } catch(e) { document.getElementById('output-text').value = 'デコードエラー: 無効な入力です'; } }
+            function copyResult() { copyToClipboard(document.getElementById('output-text').value, document.getElementById('copy-btn')); }
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAffiliateLinks('url-encode');
+            renderRelatedTools('url-encode');
+        });
+    </script>
+</body>
+
+</html>

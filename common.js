@@ -13,6 +13,16 @@ const TOOLS = [
     { id: 'bmi', icon: '⚖️', name: 'BMI計算', desc: '身長と体重からBMIを算出' },
     { id: 'zenkaku-hankaku', icon: '🔄', name: '全角⇔半角変換', desc: '全角・半角文字を一括変換' },
     { id: 'color-code', icon: '🎨', name: 'カラーコード変換', desc: 'HEX・RGB・HSLを相互変換' },
+    { id: 'shouhizei', icon: '🧾', name: '消費税計算', desc: '税込・税抜き価格をかんたん計算' },
+    { id: 'tani-henkan', icon: '📏', name: '単位変換', desc: '長さ・重さ・温度などを一括変換' },
+    { id: 'url-encode', icon: '🔗', name: 'URLエンコード/デコード', desc: 'URLの特殊文字をエンコード・デコード' },
+    { id: 'json-format', icon: '📋', name: 'JSON整形', desc: 'JSONデータを見やすく整形・圧縮' },
+    { id: 'loan-keisan', icon: '🏦', name: 'ローン計算', desc: '住宅ローン・借入の返済額を計算' },
+    { id: 'calorie', icon: '🔥', name: 'カロリー計算', desc: '1日の必要カロリーを算出' },
+    { id: 'jisa-keisan', icon: '🌍', name: '時差計算', desc: '世界の主要都市との時差を計算' },
+    { id: 'text-case', icon: '🔤', name: 'テキスト変換', desc: '大文字・小文字・タイトルケースに変換' },
+    { id: 'random-number', icon: '🎲', name: 'ランダム数生成', desc: '指定範囲のランダムな数値を生成' },
+    { id: 'base64', icon: '🔐', name: 'Base64変換', desc: 'テキストをBase64にエンコード/デコード' },
 ];
 
 // Render header
@@ -149,6 +159,56 @@ const AFFILIATE_LINKS = {
         { name: 'デザイン本', keyword: '配色デザイン 本', emoji: '🎨' },
         { name: 'カラーチャート', keyword: 'カラーチャート 色見本', emoji: '🖌️' },
         { name: 'ペンタブ', keyword: 'ペンタブレット', emoji: '✏️' },
+    ],
+    'shouhizei': [
+        { name: '電卓', keyword: '電卓 おしゃれ', emoji: '🧮' },
+        { name: '家計簿アプリ本', keyword: '家計簿 節約 本', emoji: '📕' },
+        { name: 'レシートホルダー', keyword: 'レシート ホルダー', emoji: '🧾' },
+    ],
+    'tani-henkan': [
+        { name: 'スーツケース', keyword: 'スーツケース 軽量', emoji: '🧳' },
+        { name: '計量スプーン', keyword: '計量スプーン セット', emoji: '🥄' },
+        { name: '旅行ガイド', keyword: '海外旅行 ガイドブック', emoji: '📘' },
+    ],
+    'url-encode': [
+        { name: 'Web技術本', keyword: 'Web技術 入門', emoji: '📗' },
+        { name: 'プログラミングキーボード', keyword: 'プログラミング キーボード', emoji: '⌨️' },
+        { name: 'モニター', keyword: 'PCモニター ワイド', emoji: '🖥️' },
+    ],
+    'json-format': [
+        { name: 'プログラミング本', keyword: 'JavaScript 入門 本', emoji: '📗' },
+        { name: 'API設計本', keyword: 'API設計 本', emoji: '📘' },
+        { name: 'エルゴキーボード', keyword: 'エルゴノミクス キーボード', emoji: '⌨️' },
+    ],
+    'loan-keisan': [
+        { name: 'お金の本', keyword: '住宅ローン 本', emoji: '📕' },
+        { name: 'FP資格本', keyword: 'FP3級 テキスト', emoji: '📘' },
+        { name: '貯金箱', keyword: '貯金箱 おしゃれ', emoji: '🏦' },
+    ],
+    'calorie': [
+        { name: '体重計', keyword: '体組成計 スマホ連動', emoji: '⚖️' },
+        { name: 'プロテイン', keyword: 'プロテイン ダイエット', emoji: '🥤' },
+        { name: 'フィットネスバンド', keyword: 'スマートウォッチ フィットネス', emoji: '⌚' },
+    ],
+    'jisa-keisan': [
+        { name: '世界時計', keyword: '世界時計 おしゃれ', emoji: '🕐' },
+        { name: 'トラベルグッズ', keyword: 'トラベルグッズ セット', emoji: '✈️' },
+        { name: '変換プラグ', keyword: '海外 変換プラグ', emoji: '🔌' },
+    ],
+    'text-case': [
+        { name: 'プログラミング本', keyword: 'Python 入門', emoji: '📗' },
+        { name: 'キーボード', keyword: 'メカニカルキーボード', emoji: '⌨️' },
+        { name: 'テキストエディタ本', keyword: 'VSCode 入門', emoji: '📘' },
+    ],
+    'random-number': [
+        { name: 'ボードゲーム', keyword: 'ボードゲーム 人気', emoji: '🎯' },
+        { name: 'サイコロ', keyword: 'サイコロ セット', emoji: '🎲' },
+        { name: 'くじ引きセット', keyword: 'くじ引き セット', emoji: '🎪' },
+    ],
+    'base64': [
+        { name: 'セキュリティ本', keyword: 'セキュリティ 入門 本', emoji: '🔒' },
+        { name: 'ネットワーク本', keyword: 'ネットワーク 入門', emoji: '🌐' },
+        { name: 'プログラミング本', keyword: 'プログラミング 入門', emoji: '📗' },
     ],
 };
 

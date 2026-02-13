@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カロリー計算 - 1日の基礎代謝・必要カロリー | ToolPocket</title>
+    <meta name="description" content="身長・体重・年齢・活動量から1日の基礎代謝量と必要カロリーを計算。ダイエットの目安に。完全無料。">
+    <meta name="keywords" content="カロリー計算,基礎代謝,消費カロリー,1日の必要カロリー">
+    <link rel="canonical" href="https://tool-pocket-neon.vercel.app/calorie/">
+    <link rel="stylesheet" href="../style.css">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7683631139894961" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header class="site-header" id="site-header"></header>
+    <main class="main-content">
+        <div class="tool-page-header">
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / カロリー計算</div>
+            <h1>🔥 カロリー計算</h1>
+            <p class="tool-desc">1日の必要カロリーを算出</p>
+        </div>
+        <div class="ad-slot">広告エリア</div>
+        <div class="tool-container">
+                <div class="form-group"><label>性別</label><div class="btn-group"><button class="btn btn-primary active" id="male" onclick="setGender('male')">男性</button><button class="btn" id="female" onclick="setGender('female')">女性</button></div></div>
+                <div class="form-row">
+                    <div class="form-group"><label for="cal-age">年齢</label><input type="number" id="cal-age" value="30"></div>
+                    <div class="form-group"><label for="cal-height">身長 (cm)</label><input type="number" id="cal-height" value="170"></div>
+                    <div class="form-group"><label for="cal-weight">体重 (kg)</label><input type="number" id="cal-weight" value="65"></div>
+                </div>
+                <div class="form-group"><label for="activity">活動レベル</label>
+                    <select id="activity"><option value="1.2">ほとんど運動しない</option><option value="1.375">軽い運動（週1-3回）</option><option value="1.55" selected>適度な運動（週3-5回）</option><option value="1.725">激しい運動（週6-7回）</option><option value="1.9">非常に激しい運動</option></select>
+                </div>
+                <button class="btn btn-primary btn-block" onclick="calcCal()">計算する</button>
+                <div class="result-grid" id="result" style="display:none;">
+                    <div class="result-item"><div class="val" id="bmr">-</div><div class="lbl">基礎代謝量</div></div>
+                    <div class="result-item"><div class="val" id="tdee">-</div><div class="lbl">1日の消費カロリー</div></div>
+                    <div class="result-item"><div class="val" id="diet">-</div><div class="lbl">減量目安（-500kcal）</div></div>
+                </div>
+            </div>
+        <div class="ad-slot">広告エリア</div>
+        <section class="info-section">
+            <h2>基礎代謝とは</h2>
+            <p>基礎代謝量（BMR）は、何もしていなくても消費されるエネルギー量です。ハリス・ベネディクト方程式で算出します。</p>
+            <ul><li><strong>男性</strong>: 88.362 + (13.397 × 体重kg) + (4.799 × 身長cm) - (5.677 × 年齢)</li>
+            <li><strong>女性</strong>: 447.593 + (9.247 × 体重kg) + (3.098 × 身長cm) - (4.330 × 年齢)</li></ul>
+        </section>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
+    </main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <script src="../common.js"></script>
+    <script>
+        let gender = 'male';
+            function setGender(g) { gender = g; document.getElementById('male').classList.toggle('active', g==='male'); document.getElementById('female').classList.toggle('active', g==='female'); }
+            function calcCal() {
+                const age = parseInt(document.getElementById('cal-age').value);
+                const h = parseFloat(document.getElementById('cal-height').value);
+                const w = parseFloat(document.getElementById('cal-weight').value);
+                const act = parseFloat(document.getElementById('activity').value);
+                let bmr;
+                if (gender === 'male') bmr = 88.362 + (13.397*w) + (4.799*h) - (5.677*age);
+                else bmr = 447.593 + (9.247*w) + (3.098*h) - (4.330*age);
+                const tdee = bmr * act;
+                document.getElementById('bmr').textContent = Math.round(bmr) + ' kcal';
+                document.getElementById('tdee').textContent = Math.round(tdee) + ' kcal';
+                document.getElementById('diet').textContent = Math.round(tdee - 500) + ' kcal';
+                document.getElementById('result').style.display = '';
+            }
+            calcCal();
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAffiliateLinks('calorie');
+            renderRelatedTools('calorie');
+        });
+    </script>
+</body>
+
+</html>
