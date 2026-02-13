@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BMI計箁E- 身長と体重からBMIを算�E | ToolPocket</title>
-    <meta name="description" content="身長と体重を�E力するだけでBMI�E�肥満度�E�を計算。適正体重めE��満度の判定も表示。完�E無料�E登録不要、E>
-    <meta name="keywords" content="BMI計箁EBMI,肥満度,適正体重,体重 身長">
+    <title>BMI計算 - 身長と体重からBMIを算出 | ToolPocket</title>
+    <meta name="description" content="身長と体重を入力するだけでBMI（肥満度）を計算。適正体重や肥満度の判定も表示。完全無料・登録不要。">
+    <meta name="keywords" content="BMI計算,BMI,肥満度,適正体重,体重 身長">
     <link rel="canonical" href="https://tool-pocket-neon.vercel.app/bmi/">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -15,23 +15,23 @@
     <header class="site-header" id="site-header"></header>
     <main class="main-content">
         <div class="tool-page-header">
-            <div class="breadcrumb"><a href="../">ToolPocket</a> / BMI計箁E/div>
-            <h1>⚖︁EBMI計箁E/h1>
-            <p class="tool-desc">身長と体重を�E力すると、BMI�E�Eody Mass Index�E�と肥満度の判定を表示します、E/p>
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / BMI計算</div>
+            <h1>⚖️ BMI計算</h1>
+            <p class="tool-desc">身長と体重を入力すると、BMI（Body Mass Index）と肥満度の判定を表示します。</p>
         </div>
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">広告エリア</div>
         <div class="tool-container">
             <div class="form-row">
                 <div class="form-group">
                     <label for="height">身長 (cm)</label>
-                    <input type="number" id="height" placeholder="侁E 170" value="170" step="0.1">
+                    <input type="number" id="height" placeholder="例: 170" value="170" step="0.1">
                 </div>
                 <div class="form-group">
                     <label for="weight">体重 (kg)</label>
-                    <input type="number" id="weight" placeholder="侁E 65" value="65" step="0.1">
+                    <input type="number" id="weight" placeholder="例: 65" value="65" step="0.1">
                 </div>
             </div>
-            <button class="btn btn-primary btn-block" onclick="calcBMI()">計算すめE/button>
+            <button class="btn btn-primary btn-block" onclick="calcBMI()">計算する</button>
 
             <div class="result-box" id="result" style="display:none;">
                 <div class="result-value" id="bmi-value">-</div>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="result-item">
                     <div class="val" id="ideal-bmi-range">-</div>
-                    <div class="lbl">標準BMI篁E��</div>
+                    <div class="lbl">標準BMI範囲</div>
                 </div>
             </div>
 
@@ -63,28 +63,29 @@
                     <div style="flex:5;background:#c0392b;"></div>
                 </div>
                 <div style="display:flex;font-size:11px;color:var(--text-muted);margin-top:4px;">
-                    <div style="flex:3;text-align:center;">痩ぁE/div>
-                    <div style="flex:7;text-align:center;">標溁E/div>
+                    <div style="flex:3;text-align:center;">痩せ</div>
+                    <div style="flex:7;text-align:center;">標準</div>
                     <div style="flex:5;text-align:center;">肥満1</div>
                     <div style="flex:5;text-align:center;">肥満2</div>
                     <div style="flex:5;text-align:center;">肥満3+</div>
                 </div>
             </div>
         </div>
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">広告エリア</div>
         <section class="info-section">
             <h2>BMIとは</h2>
-            <p>BMI�E�Eody Mass Index�E��E、体重と身長の関係から算�Eされる肥満度を表す指標です。日本肥満学会�E基準では以下�Eように刁E��されます！E/p>
+            <p>BMI（Body Mass Index）は、体重と身長の関係から算出される肥満度を表す指標です。日本肥満学会の基準では以下のように分類されます：</p>
             <ul>
-                <li><strong>18.5未満</strong>: 低体重�E�痩せ型�E�E/li>
-                <li><strong>18.5、E4.9</strong>: 普通体重</li>
-                <li><strong>25.0、E9.9</strong>: 肥満�E�E度�E�E/li>
-                <li><strong>30.0、E4.9</strong>: 肥満�E�E度�E�E/li>
-                <li><strong>35.0以丁E/strong>: 肥満�E�E度以上！E/li>
+                <li><strong>18.5未満</strong>: 低体重（痩せ型）</li>
+                <li><strong>18.5〜24.9</strong>: 普通体重</li>
+                <li><strong>25.0〜29.9</strong>: 肥満（1度）</li>
+                <li><strong>30.0〜34.9</strong>: 肥満（2度）</li>
+                <li><strong>35.0以上</strong>: 肥満（3度以上）</li>
             </ul>
-            <p>計算弁E BMI = 体重(kg) ÷ 身長(m)²</p>
+            <p>計算式: BMI = 体重(kg) ÷ 身長(m)²</p>
         </section>
-        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div><div class="related-tools" id="related-tools"></div>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
     </main>
     <footer class="site-footer" id="site-footer"></footer>
     <script src="../common.js"></script>
@@ -99,11 +100,11 @@
 
             let category = '';
             let color = '';
-            if (bmi < 18.5) { category = '低体重�E�痩せ型�E�E; color = '#3498db'; }
+            if (bmi < 18.5) { category = '低体重（痩せ型）'; color = '#3498db'; }
             else if (bmi < 25) { category = '普通体重'; color = 'var(--accent-green)'; }
-            else if (bmi < 30) { category = '肥満�E�E度�E�E; color = 'var(--accent-orange)'; }
-            else if (bmi < 35) { category = '肥満�E�E度�E�E; color = 'var(--accent-red)'; }
-            else { category = '肥満�E�E度以上！E; color = '#c0392b'; }
+            else if (bmi < 30) { category = '肥満（1度）'; color = 'var(--accent-orange)'; }
+            else if (bmi < 35) { category = '肥満（2度）'; color = 'var(--accent-red)'; }
+            else { category = '肥満（3度以上）'; color = '#c0392b'; }
 
             document.getElementById('bmi-category').textContent = category;
             document.getElementById('bmi-category').style.color = color;
@@ -112,7 +113,7 @@
             document.getElementById('ideal-weight').textContent = ideal.toFixed(1) + 'kg';
             const diff = w - ideal;
             document.getElementById('weight-diff').textContent = (diff >= 0 ? '+' : '') + diff.toFixed(1) + 'kg';
-            document.getElementById('ideal-bmi-range').textContent = '18.5、E4.9';
+            document.getElementById('ideal-bmi-range').textContent = '18.5〜24.9';
 
             document.getElementById('result').style.display = '';
             document.getElementById('details').style.display = '';

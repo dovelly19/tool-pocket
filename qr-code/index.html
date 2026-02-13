@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QRコード生戁E- チE��ストやURLからQRコード作�E | ToolPocket</title>
-    <meta name="description" content="チE��ストやURLを�E力するだけでQRコードを瞬時に生�E。ダウンロードも可能。完�E無料�E登録不要�EオンラインチE�Eル、E>
-    <meta name="keywords" content="QRコード生戁EQRコード作�E,QR生�E,QRコーチE無斁E>
+    <title>QRコード生成 - テキストやURLからQRコード作成 | ToolPocket</title>
+    <meta name="description" content="テキストやURLを入力するだけでQRコードを瞬時に生成。ダウンロードも可能。完全無料・登録不要のオンラインツール。">
+    <meta name="keywords" content="QRコード生成,QRコード作成,QR生成,QRコード 無料">
     <link rel="canonical" href="https://tool-pocket-neon.vercel.app/qr-code/">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -15,47 +15,48 @@
     <header class="site-header" id="site-header"></header>
     <main class="main-content">
         <div class="tool-page-header">
-            <div class="breadcrumb"><a href="../">ToolPocket</a> / QRコード生戁E/div>
-            <h1>📱 QRコード生戁E/h1>
-            <p class="tool-desc">チE��ストやURLを�E力するだけで、QRコードを即座に生�Eできます、E/p>
+            <div class="breadcrumb"><a href="../">ToolPocket</a> / QRコード生成</div>
+            <h1>📱 QRコード生成</h1>
+            <p class="tool-desc">テキストやURLを入力するだけで、QRコードを即座に生成できます。</p>
         </div>
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">広告エリア</div>
         <div class="tool-container">
             <div class="form-group">
-                <label for="qr-input">チE��ストまた�EURL</label>
-                <input type="text" id="qr-input" placeholder="侁E https://example.com"
+                <label for="qr-input">テキストまたはURL</label>
+                <input type="text" id="qr-input" placeholder="例: https://example.com"
                     value="https://tool-pocket-neon.vercel.app">
             </div>
             <div class="form-group">
                 <label for="qr-size">サイズ</label>
                 <select id="qr-size">
-                    <option value="4">封E(132px)</option>
+                    <option value="4">小 (132px)</option>
                     <option value="6" selected>中 (200px)</option>
                     <option value="10">大 (330px)</option>
                 </select>
             </div>
-            <button class="btn btn-primary btn-block" onclick="generateQR()">QRコードを生�E</button>
+            <button class="btn btn-primary btn-block" onclick="generateQR()">QRコードを生成</button>
             <div style="text-align:center;margin-top:20px;">
                 <div class="qr-output" id="qr-output" style="display:none;"></div>
             </div>
             <div class="btn-group" style="margin-top:16px;justify-content:center;" id="qr-actions"
                 style="display:none;">
                 <button class="btn btn-secondary" onclick="downloadQR()" id="dl-btn" style="display:none;">💾
-                    ダウンローチE/button>
+                    ダウンロード</button>
             </div>
         </div>
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">広告エリア</div>
         <section class="info-section">
             <h2>QRコードとは</h2>
-            <p>QRコード！Euick Response Code�E��E、二次允E��ーコード�E一種で、スマ�Eトフォンのカメラで読み取ることができます。URL、テキスト、E��絡先情報など、さまざまなチE�Eタを格納できます、E/p>
+            <p>QRコード（Quick Response Code）は、二次元バーコードの一種で、スマートフォンのカメラで読み取ることができます。URL、テキスト、連絡先情報など、さまざまなデータを格納できます。</p>
             <ul>
-                <li>Webサイト�EURLを手軽に共朁E/li>
-                <li>名刺めE��ラシに印刷して惁E��を伝達</li>
-                <li>Wi-Fiの接続情報を�E朁E/li>
-                <li>イベント�E受付やチケチE��に活用</li>
+                <li>WebサイトのURLを手軽に共有</li>
+                <li>名刺やチラシに印刷して情報を伝達</li>
+                <li>Wi-Fiの接続情報を共有</li>
+                <li>イベントの受付やチケットに活用</li>
             </ul>
         </section>
-        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div><div class="related-tools" id="related-tools"></div>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
     </main>
     <footer class="site-footer" id="site-footer"></footer>
     <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
@@ -63,7 +64,7 @@
     <script>
         function generateQR() {
             const text = document.getElementById('qr-input').value.trim();
-            if (!text) { showToast('チE��ストを入力してください'); return; }
+            if (!text) { showToast('テキストを入力してください'); return; }
             const size = parseInt(document.getElementById('qr-size').value);
             const qr = qrcode(0, 'M');
             qr.addData(text);

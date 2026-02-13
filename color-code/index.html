@@ -1,12 +1,12 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>カラーコード変換 - HEX・RGB・HSLを相互変換 | ToolPocket</title>
-    <meta name="description" content="カラーコード！EEX、RGB、HSL�E�を瞬時に相互変換。カラーピッカー搭載。WebチE��インめE��発に便利。完�E無料、E>
-    <meta name="keywords" content="カラーコード変換,HEX RGB 変換,色コーチEカラーピッカー,RGB変換">
+    <meta name="description" content="カラーコード（HEX、RGB、HSL）を瞬時に相互変換。カラーピッカー搭載。Webデザインや開発に便利。完全無料。">
+    <meta name="keywords" content="カラーコード変換,HEX RGB 変換,色コード,カラーピッカー,RGB変換">
     <link rel="canonical" href="https://tool-pocket-neon.vercel.app/color-code/">
     <link rel="stylesheet" href="../style.css">
 </head>
@@ -17,9 +17,9 @@
         <div class="tool-page-header">
             <div class="breadcrumb"><a href="../">ToolPocket</a> / カラーコード変換</div>
             <h1>🎨 カラーコード変換</h1>
-            <p class="tool-desc">HEX、RGB、HSLのカラーコードを相互に変換します。カラーピッカーでも色を選べます、E/p>
+            <p class="tool-desc">HEX、RGB、HSLのカラーコードを相互に変換します。カラーピッカーでも色を選べます。</p>
         </div>
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">広告エリア</div>
         <div class="tool-container">
             <div class="color-preview" id="color-preview" style="background:#6c5ce7;"></div>
 
@@ -33,7 +33,7 @@
                 <label for="hex-input">HEX</label>
                 <div style="display:flex;gap:8px;">
                     <input type="text" id="hex-input" value="#6c5ce7" placeholder="#000000">
-                    <button class="copy-btn" onclick="copyColor('hex')">コピ�E</button>
+                    <button class="copy-btn" onclick="copyColor('hex')">コピー</button>
                 </div>
             </div>
 
@@ -46,7 +46,7 @@
                 </div>
                 <div style="display:flex;gap:8px;margin-top:8px;">
                     <input type="text" id="rgb-output" value="rgb(108, 92, 231)" readonly style="flex:1;">
-                    <button class="copy-btn" onclick="copyColor('rgb')">コピ�E</button>
+                    <button class="copy-btn" onclick="copyColor('rgb')">コピー</button>
                 </div>
             </div>
 
@@ -54,21 +54,22 @@
                 <label>HSL</label>
                 <div style="display:flex;gap:8px;">
                     <input type="text" id="hsl-output" value="hsl(247, 75%, 63%)" readonly style="flex:1;">
-                    <button class="copy-btn" onclick="copyColor('hsl')">コピ�E</button>
+                    <button class="copy-btn" onclick="copyColor('hsl')">コピー</button>
                 </div>
             </div>
         </div>
-        <div class="ad-slot">庁E��エリア</div>
+        <div class="ad-slot">広告エリア</div>
         <section class="info-section">
-            <h2>カラーコードにつぁE��</h2>
-            <p>Web開発めE��ザインでは、色を指定するためにさまざまな形式�Eカラーコードが使用されます、E/p>
+            <h2>カラーコードについて</h2>
+            <p>Web開発やデザインでは、色を指定するためにさまざまな形式のカラーコードが使用されます。</p>
             <ul>
-                <li><strong>HEX</strong>: #RRGGBB形式、ESSで最もよく使われめE/li>
-                <li><strong>RGB</strong>: Red, Green, Blueの3値�E�E-255�E�で色を指宁E/li>
-                <li><strong>HSL</strong>: Hue�E�色相�E�E Saturation�E�彩度�E�E Lightness�E��E度�E�で持E��E/li>
+                <li><strong>HEX</strong>: #RRGGBB形式。CSSで最もよく使われる</li>
+                <li><strong>RGB</strong>: Red, Green, Blueの3値（0-255）で色を指定</li>
+                <li><strong>HSL</strong>: Hue（色相）, Saturation（彩度）, Lightness（明度）で指定</li>
             </ul>
         </section>
-        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div><div class="related-tools" id="related-tools"></div>
+        <div class="info-section" id="affiliate-links" style="margin-top:24px;"></div>
+        <div class="related-tools" id="related-tools"></div>
     </main>
     <footer class="site-footer" id="site-footer"></footer>
     <script src="../common.js"></script>
@@ -131,7 +132,7 @@
             if (type === 'hex') text = document.getElementById('hex-input').value;
             else if (type === 'rgb') text = document.getElementById('rgb-output').value;
             else if (type === 'hsl') text = document.getElementById('hsl-output').value;
-            navigator.clipboard.writeText(text).then(() => showToast('✁Eコピ�Eしました: ' + text));
+            navigator.clipboard.writeText(text).then(() => showToast('✅ コピーしました: ' + text));
         }
 
         document.getElementById('color-picker').addEventListener('input', e => updateFromHex(e.target.value));
